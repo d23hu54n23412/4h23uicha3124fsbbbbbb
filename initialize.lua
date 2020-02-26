@@ -1,9 +1,15 @@
-local environment = {} -- Defining our environment/preset API we'll be using
-if getenv().BGZ then
+--[[
+    Initalize.lua
+    Handles the backbones to our environmental API
+    @author NodeSupport
+--]]
+
+local environment = {}
+if getenv().gg then
     return warn("Battlegrounds Zero Environment is already loaded")
 end
 
-getenv().BGZ = environment
+getenv().gg = environment
 
 function environment.load(path)
     if not path then
@@ -14,9 +20,4 @@ function environment.load(path)
     elseif type(path) == "number" then
         return game:GetObjects("rbxassetid://" .. path)[1]
     end
-end
-
-
-function environment.error(string)
-    warn("[BG ZERO]", string)
 end
