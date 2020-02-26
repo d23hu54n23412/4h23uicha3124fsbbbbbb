@@ -15,3 +15,8 @@ function environment.load(path)
         return game:GetObjects("rbxassetid://" .. path)[1]
     end
 end
+
+
+function environment.error(string)
+    warn("[BG ZERO]", string)
+end
