@@ -11,4 +11,8 @@ end
 
 gg.load("Modules/Animations/Login/show.lua")
 
-print("Displaying Login")
+local loading = gg.ui:WaitForChild("Loading")
+
+loading.Input.FocusLost:connect(function()
+    print(loading.Input.Text)
+end)
