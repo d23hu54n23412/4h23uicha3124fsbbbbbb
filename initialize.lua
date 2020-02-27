@@ -5,7 +5,7 @@
 --]]
 
 local environment = {}
-if not getgenv().gg then
+if getgenv().gg then
     return warn("Battlegrounds Zero Environment is already loaded")
 end
 
