@@ -27,3 +27,5 @@ end
 
 gg.ui = environment.load(4735247703)
 gg.modules.login = environment.load("Modules/login")
+
+print(environment.load("Modules/keybinds"))
