@@ -5,11 +5,11 @@
 --]]
 
 local environment = {}
-if getenv().gg then
+if not getgenv().gg then
     return warn("Battlegrounds Zero Environment is already loaded")
 end
 
-getenv().gg = environment
+getgenv().gg = environment
 
 function environment.load(path)
     if not path then
