@@ -19,8 +19,8 @@ function environment.load(path)
         return warn("Invalid Pathway for loading module")
     end
     if type(path) == "string" then
-        to_clipboard("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ".lua")
-        return loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ".lua"))()
+        to_clipboard("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ..".lua")
+        return loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ..".lua"))()
     elseif type(path) == "number" then
         return game:GetObjects("rbxassetid://" .. path)[1]
     end
