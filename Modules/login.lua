@@ -9,7 +9,7 @@ if not ui then
     return warn("Failure whilst loading Battleground Zero UI")
 end
 
-gg.load("Modules/Animations/Login/show.lua")
+gg.load("Modules/Animations/Login/show")
 
 local loading = gg.ui:WaitForChild("Loading")
 
