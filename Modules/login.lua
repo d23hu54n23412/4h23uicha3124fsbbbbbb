@@ -14,5 +14,8 @@ gg.load("Modules/Animations/Login/show")
 local loading = gg.ui:WaitForChild("Loading")
 
 loading.Input.FocusLost:connect(function()
-    print(loading.Input.Text)
+    local response = loading.Input.Text
+    if response == "test" then
+        gg.load("Modules/Animations/Login/hide")
+    end
 end)
