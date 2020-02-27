@@ -1,3 +1,9 @@
+--[[
+    Login/hide.lua
+    Handles the login hiding feature of the UI
+    @author NodeSupport
+]]
+
 local Ui = gg.ui
 local loading = Ui:WaitForChild("Loading")
 local RunService = game:GetService("RunService")
