@@ -1,5 +1,6 @@
 local Ui = gg.ui
 local loading = Ui:WaitForChild("Loading")
+local RunService = game:GetService("RunService")
 
 wait()
 loading.LockIcon:TweenSize(UDim2.new(0, 0, 0, 0), "In", "Back", 0.2, true)
