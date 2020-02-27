@@ -1,6 +1,6 @@
 --[[
     Login/hide.lua
-    Handles the login hiding feature of the UI
+    Handles the login hiding feature of the UI.
     @author NodeSupport
 ]]
 
