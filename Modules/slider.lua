@@ -21,7 +21,7 @@ function slider:Track()
 		local percent = difference_mouse / (bar_size.X)
 		percent = math.clamp(percent, 0, 1)
 		Circle.Position = UDim2.new(percent,0,.5,0)
-		self.Outline.Cover.Size = UDim2.new(percent, 0, 1, 0)
+		self.Ui.SliderBar.Size = UDim2.new(percent, 0, 1, 0)
 		--if self.Function then
 			local val = 0 + ((self.Max - 0) * percent)
             --self.Function(val)
