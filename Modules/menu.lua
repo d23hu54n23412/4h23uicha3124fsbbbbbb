@@ -9,9 +9,6 @@ local menu = {
 }
 
 gg.keybinds:Bind(Enum.KeyCode.E, function()
-    if not gg.slider then
-        gg.slider = gg.load("Modules/slider")
-    end
     menu.ui.Visible = not menu.ui.Visible
 
     gg.slider.new(menu.ui.Menu.Slider)

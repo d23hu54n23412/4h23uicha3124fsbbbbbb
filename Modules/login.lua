@@ -18,6 +18,7 @@ loading.Input.FocusLost:connect(function()
     if response == "test" then
         gg.keybinds = gg.load("Modules/keybinds")
         gg.client = game:GetService("Players").LocalPlayer
+        gg.slider = gg.load("Modules/slider")
         gg.load("Modules/menu")
         gg.load("Modules/Animations/Login/hide")
     end
