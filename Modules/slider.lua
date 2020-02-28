@@ -49,7 +49,7 @@ function slider.new(ui, maximum)
         end
     })
 
-    Circle.InputBegan:connect(function(input), 
+    Circle.InputBegan:connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             newSlider:Track()
         end
