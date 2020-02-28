@@ -31,6 +31,10 @@ function slider:Track()
             for _, func in pairs(self.functions) do
                 if self.Ui:FindFirstChild("Count") then
                     self.Ui.Count.Position = self.Ui.Circle.Position + UDim2.new(0, 0, 0.583, 0)
+                    if round then
+                        local mult = 10 ^ (self.round or 0)
+                        val = math.floor(val * mult + 0.5) / mult
+                    end
                     self.Ui.Count.Text = tostring(val)
                 end
                 func(val)
@@ -39,7 +43,7 @@ function slider:Track()
 	end)
 end
 
-function slider.new(ui, maximum)
+function slider.new(ui, maximum, round)
     if not ui or not maximum then
         return warn("Invalid specified UI/Maximum in slider")
     end
@@ -48,6 +52,7 @@ function slider.new(ui, maximum)
         Ui = ui,
         maximum = maximum,
         functions = {}
+        round = round,
     }, {
         __index = function(self, index)
             if slider[index] then
