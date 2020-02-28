@@ -11,7 +11,11 @@ local menu = {
 gg.keybinds:Bind(Enum.KeyCode.E, function()
     menu.ui.Visible = not menu.ui.Visible
 
-    gg.slider.new(menu.ui.Menu.Slider, 10)
+    local newSlider = gg.slider.new(menu.ui.Menu.Slider, 10)
+
+    newSlider:Bind(function(val)
+        print(val)
+    end)
 end)
 
 return menu

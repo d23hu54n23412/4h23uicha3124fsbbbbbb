@@ -4,9 +4,11 @@
     @author NodeSupport
 --]]
 
-print("loading slider")
-
 local slider = {}
+
+function slider:Bind(func)
+    table.insert(self.functions, func)
+end
 
 function slider:Track()
     if not self.Ui then
@@ -23,12 +25,13 @@ function slider:Track()
 		local percent = difference_mouse / (bar_size.X)
 		percent = math.clamp(percent, 0, 1)
 		Circle.Position = UDim2.new(percent,0,.5,0)
-		self.Ui.SliderBar.Size = UDim2.new(percent, 0, 1, 0)
-		--if self.Function then
-			local val = 0 + ((self.Max - 0) * percent)
-            --self.Function(val)
-            print(val)
-		--end
+        self.Ui.SliderBar.Size = UDim2.new(percent, 0, 0.1, 0)
+		if #self.functions > 0 then
+			local val = 0 + ((self.maximum - 0) * percent)
+            for _, func in pairs(self.functions) do
+                func(val)
+            end
+		end
 	end)
 end
 
@@ -38,7 +41,9 @@ function slider.new(ui, maximum)
     end
     local circle = ui:FindFirstChild("Circle")
     local newSlider = setmetatable({
-        Ui = ui, 
+        Ui = ui,
+        maximum = maximum,
+        functions = {}
     }, {
         __index = function(self, index)
             if slider[index] then
