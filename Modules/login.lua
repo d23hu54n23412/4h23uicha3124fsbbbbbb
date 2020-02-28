@@ -17,6 +17,7 @@ loading.Input.FocusLost:connect(function()
     local response = loading.Input.Text
     if response == "test" then
         gg.keybinds = gg.load("Modules/keybinds")
+        gg.client = game:GetService("Players").LocalPlayer
         gg.load("Modules/menu")
         gg.load("Modules/Animations/Login/hide")
     end
