@@ -29,6 +29,10 @@ function slider:Track()
 		if #self.functions > 0 then
 			local val = 0 + ((self.maximum - 0) * percent)
             for _, func in pairs(self.functions) do
+                if self.Ui:FindFirstChild("Count") then
+                    self.Ui.Count.Position = self.Ui.Circle.Position + UDim2.new(0, 0, 0.583, 0)
+                    self.Ui.Count.Text = tostring(val)
+                end
                 func(val)
             end
 		end
@@ -67,7 +71,9 @@ function slider.new(ui, maximum)
 				newSlider.TrackConnection = nil
 			end
 		end
-	end)
+    end)
+    
+    return newSlider
 end
 
 return slider
