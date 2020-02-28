@@ -4,6 +4,8 @@
     @author NodeSupport
 --]]
 
+print("loading slider")
+
 local slider = {}
 
 function slider:Track()
