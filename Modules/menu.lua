@@ -13,7 +13,7 @@ gg.keybinds:Bind(Enum.KeyCode.E, function()
 
     local newSlider = gg.slider.new(menu.ui.Menu.Slider, 10, 1)
 
-    local keybindChange = gg.keybinds
+    local keybindChange = gg.keybinds.newButton(menu.ui.Menu.Keybind, "Hitbox Extender")
 end)
 
 return menu
