@@ -6,7 +6,7 @@ local hitboxExtender = {
     Activated = false,
     Keybind = Enum.KeyCode.X,
     Parts = {},
-    DiedBinds = {}
+    DiedBinds = {},
     Size = 10,
     Cooldown = tick(),
 }
