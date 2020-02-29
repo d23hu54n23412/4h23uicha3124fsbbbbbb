@@ -44,7 +44,7 @@ UserInputService.InputBegan:connect(function(input)
             if gg.ui.Menu.Alert.Visible == true then
                 gg.ui.Menu.Alert.Visible = false
             end
-            ui.Keybind.Text = string.char(keyCode.Value):upper()
+            ui.Keybind.Text = UserInputService:GetStringForKeyCode(keyCode)
             bindingKey = nil
         end
     elseif keyCode then -- Checking to see if the input exists
