@@ -87,7 +87,7 @@ function proxyPart.new()
     return setmetatable({
         Part = Instance.new("Part"),
         Linking = nil,
-        TouchedBindings = {}
+        TouchedBindings = {},
         TouchedConnection = nil
     }, {
         __index = function(self, index)
