@@ -23,6 +23,7 @@ function ProxyPart:CreateOutline()
     selectionBox.Color3 = Color3.new(255, 255, 255)
     selectionBox.LineThickness = 0.025
     selectionBox.Adornee = self.Part
+    selectionBox.Parent = self.Part
 
     self.selectionBox = selectionBox
 end
