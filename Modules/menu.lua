@@ -15,7 +15,7 @@ gg.keybinds:Bind(Enum.KeyCode.E, function()
     menu.ui.Visible = not menu.ui.Visible
 
     if required == false then
-        gg.load("Modules/Combat/HitboxExtender")
+        gg.load("Modules/Combat/hitboxExtender")
     end
 
     required = true

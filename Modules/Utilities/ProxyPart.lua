@@ -6,10 +6,40 @@
 --]]
 
 
-local ProxyPart = {}
+local proxyPart = {}
 local RunService = game:GetService("RunService")
 
-function ProxyPart:CreateOutline()
+function proxyPart:BindTouch(func)
+    if not self.Part then
+        return
+    end
+    if #self.TouchedBindings == 0 and not self.TouchedConnection then
+        self.TouchedConnection = self.Part.Touched:connect(function(part)
+            for _,func in pairs(self.TouchedBindings) do
+                func(part)
+            end
+        end)
+    end
+    table.insert(self.TouchedBindings, func)
+end
+
+function proxyPart:Destroy()
+    if self.TouchedConnection then
+        self.TouchedConnection:Disconnect()
+    end
+    if self.Linking then
+        self.Linking:Disconnect()
+    end
+    if self.selectionBox then
+        self.selectionBox:Destroy()
+    end
+    if self.Part then
+        self.Part:Destroy()
+    end
+    self = nil
+end
+
+function proxyPart:CreateOutline()
     if not self.Part then
         return
     end
@@ -28,14 +58,14 @@ function ProxyPart:CreateOutline()
     self.selectionBox = selectionBox
 end
 
-function ProxyPart:SetSize(Vector)
+function proxyPart:SetSize(Vector)
     if not self.Part or not Vector then
         return
     end
     self.Part.Size = Vector
 end
 
-function ProxyPart:Link(Part)
+function proxyPart:Link(Part)
     if not self.Part then
         return
     end
@@ -53,19 +83,21 @@ function ProxyPart:Link(Part)
     end)
 end
 
-function ProxyPart.new()
+function proxyPart.new()
     return setmetatable({
         Part = Instance.new("Part"),
-        Linking = nil,
+        Linking = nil,,
+        TouchedBindings = {}
+        TouchedConnection = nil
     }, {
         __index = function(self, index)
-            if ProxyPart[index] then
+            if proxyPart[index] then
                 return function(self, ...)
-                    return ProxyPart[index](self, ...)
+                    return proxyPart[index](self, ...)
                 end
             end
         end
     })
 end
 
-return ProxyPart
+return proxyPart

@@ -22,7 +22,7 @@ function keybinds.newButton(ui, value)
         if not ui then
             return warn("Invalid UI whilst creating new Keybind Button")
         end
-        print('d-1')
+        
         local alert = gg.ui.Menu.Alert
         alert.Text = "Press any key to bind ".. value .."."
         alert.Visible = true
