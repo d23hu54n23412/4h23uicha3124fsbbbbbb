@@ -14,39 +14,66 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
 function hitboxExtender:Off()
+    if hitboxExtender.PlayerAdded then
+        hitboxExtender.PlayerAdded:Disconnect()
+        hitboxExtender.PlayerAdded = nil
+    end
     for _, proxy in pairs(hitboxExtender.Parts) do
         proxy:Destroy()
     end
 end
 
 function hitboxExtender:On()
-    for _, player in pairs(Players:GetPlayers()) do
-        if player ~= gg.client then
-            local character = player.Character or player.CharacterAdded:Wait()
-            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-            local proxy = gg.proxyPart.new()
-            proxy:Link(humanoidRootPart)
-            proxy:SetSize(Vector3.new(self.Size, self.Size, self.Size))
-            proxy:CreateOutline()
+    local function createHitbox(player)
+        if player == gg.client then
+            return
+        end
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
-            proxy:BindTouch(function(part)
-                local tool = part.Parent
-                if tool:IsA("Tool") then
-                    local tip = tool:FindFirstChild("Tip")
-                    if tip then
-                        local character = tool.Parent
-                        local Player = Players:GetPlayerFromCharacter(character)
-                        if Player == gg.client then
-                            print("Execute damage on user")
-                        end
+        local proxy = gg.proxyPart.new()
+        proxy:Link(humanoidRootPart)
+        proxy:SetSize(Vector3.new(self.Size, self.Size, self.Size))
+        proxy:CreateOutline()
+
+        proxy:BindTouch(function(part)
+            local tool = part.Parent
+            if tool:IsA("Tool") then
+                local tip = tool:FindFirstChild("Tip")
+                if tip then
+                    local character = tool.Parent
+                    local Player = Players:GetPlayerFromCharacter(character)
+                    if Player == gg.client then
+                        print("Execute damage on user")
                     end
                 end
-            end)
+            end
+        end)
 
-            table.insert(hitboxExtender.Parts, proxy)
-        end
+        local humanoid = character:WaitForChild("Humanoid")
+        humanoid.Died:Connect(function()
+            proxy:Destroy()
+            for i,v in pairs(hitboxExtender.Parts) do
+                if v == proxy then
+                    table.remove(hitboxExtender.Parts, i)
+                end
+            end
+        end)
+
+        table.insert(hitboxExtender.Parts, proxy)
     end
+
+    for _, player in pairs(Players:GetPlayers()) do
+        createHitbox(player)
+    end
+
+    hitboxExtender.PlayerAdded = Players.PlayerAdded:connect(function(player)
+        createHitbox(player)
+        player.CharacterAdded:Connect(function()
+            createHitbox(player)
+        end)
+    end)
 end
 
 -- Creating a slider
