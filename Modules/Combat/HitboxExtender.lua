@@ -36,7 +36,7 @@ local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Menu.Slider, 10, 1)
 newSlider:Bind(function(val)
     for _,proxy in pairs(HitboxExtender.Parts) do
         HitboxExtender.Size = val
-        proxy:SetSize(Vector3.new(self.Size, self.Size, self.Size))
+        proxy:SetSize(Vector3.new(HitboxExtender.Size, HitboxExtender.Size, HitboxExtender.Size))
     end
 end)
 
