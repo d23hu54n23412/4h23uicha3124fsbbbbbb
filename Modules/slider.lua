@@ -31,7 +31,7 @@ function slider:Track()
             for _, func in pairs(self.functions) do
                 if self.Ui:FindFirstChild("Count") then
                     self.Ui.Count.Position = self.Ui.Circle.Position + UDim2.new(0, 0, 0.583, 0)
-                    if round then
+                    if self.round then
                         local mult = 10 ^ (self.round or 0)
                         val = math.floor(val * mult + 0.5) / mult
                     end
