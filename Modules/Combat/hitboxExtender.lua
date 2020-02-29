@@ -31,9 +31,16 @@ function hitboxExtender:On()
             proxy:CreateOutline()
 
             proxy:BindTouch(function(part)
-                local Player = Players:GetPlayerFromCharacter(part.Parent)
-                if Player then
-                    print('Damage '.. Player.Name ..' and potentially set a new upvalue for the hit cooldown?')
+                local tool = part.Parent
+                if tool:IsA("Tool") then
+                    local tip = tool:FindFirstChild("Tip")
+                    if tip then
+                        local character = tool.Parent
+                        local Player = Players:GetPlayerFromCharacter(character)
+                        if Player == gg.client then
+                            print("Execute damage on user")
+                        end
+                    end
                 end
             end)
 
