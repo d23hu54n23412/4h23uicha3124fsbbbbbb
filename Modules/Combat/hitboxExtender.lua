@@ -57,10 +57,9 @@ function hitboxExtender:On()
                         if event and tick() - hitboxExtender.Cooldown >= .6 then
                             event:FireServer("dmg", humanoid)
                             hitboxExtender.Cooldown = tick()
-                        elseif not event then
+                        elseif not event then -- Lake tech detection
                             local event = tool:FindFirstChild("SwordEvent")
                             if event then
-                                print("On lake tech")
                                 if tick() - hitboxExtender.Cooldown >= .6 then
                                     event:FireServer(humanoid)
                                 end
@@ -96,6 +95,14 @@ function hitboxExtender:On()
         end)
     end)
 end
+
+-- Creating a keybind handler
+
+local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Menu.Keybind, "Hitbox Extender")]]
+
+newKeybind:Bind(function(key)
+    hitboxExtender.Keybind = key
+end)
 
 -- Creating a slider
 

@@ -15,10 +15,22 @@ local keybinds = {
     functionNames = {} -- @NAMES
 }
 
+local Button = {}
+
 local bindingKey = nil
 
+function Button:Bind(func)
+    table.insert(self.Bindings, func)
+end
+
 function keybinds.newButton(ui, value)
-    ui.Keybind.MouseButton1Down:Connect(function()
+    local newButton = setmetatable({
+        Function = nil,
+        Bindings = {}
+    }, {
+        __index = Button
+    })
+    newButton.Function = ui.Keybind.MouseButton1Down:Connect(function()
         if not ui then
             return warn("Invalid UI whilst creating new Keybind Button")
         end
@@ -28,8 +40,9 @@ function keybinds.newButton(ui, value)
         alert.Visible = true
 
         --local currentKeybind = Enum.KeyCode[ui.Keybind.Text]
-        bindingKey = {ui}
+        bindingKey = {ui, newButton}
     end)
+    return newButton
 end
 
 -- @UserInputService.InputBegan
@@ -40,12 +53,19 @@ UserInputService.InputBegan:connect(function(input)
     local keyCode = input.KeyCode
     if keyCode and bindingKey and keyCode ~= Enum.KeyCode.Unknown then
         local ui = bindingKey[1]
+        local meta = bindingKey[2]
         if ui then
             if gg.ui.Menu.Alert.Visible == true then
                 gg.ui.Menu.Alert.Visible = false
             end
             ui.Keybind.Text = UserInputService:GetStringForKeyCode(keyCode)
             bindingKey = nil
+
+            if meta then
+                for _, func in pairs(meta.Bindings) do
+                    func(keyCode)
+                end
+            end
         end
     elseif keyCode then -- Checking to see if the input exists
         local funcs = keybinds.binds[keyCode]
