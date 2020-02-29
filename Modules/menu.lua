@@ -13,9 +13,7 @@ gg.keybinds:Bind(Enum.KeyCode.E, function()
 
     local newSlider = gg.slider.new(menu.ui.Menu.Slider, 10, 1)
 
-    newSlider:Bind(function(val)
-        print(val)
-    end)
+    local keybindChange = gg.keybinds
 end)
 
 return menu
