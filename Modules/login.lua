@@ -17,7 +17,7 @@ local function loadModules()
     gg.keybinds = gg.load("Modules/keybinds")
     gg.client = game:GetService("Players").LocalPlayer
     gg.slider = gg.load("Modules/slider")
-    gg.proxyPart = gg.load("Utilities/ProxyPart")
+    gg.proxyPart = gg.load("Modules/Utilities/ProxyPart")
     gg.load("Modules/menu")
 end
 
