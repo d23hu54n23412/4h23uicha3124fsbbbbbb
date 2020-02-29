@@ -38,8 +38,7 @@ end
 -- @listens InputService#Began
 UserInputService.InputBegan:connect(function(input)
     local keyCode = input.KeyCode
-    if keyCode and bindingKey then
-        print(keyCode)
+    if keyCode and bindingKey and keyCode ~= Enum.KeyCode.Unknown then
         local ui = bindingKey[1]
         if ui then
             print('d-2')
