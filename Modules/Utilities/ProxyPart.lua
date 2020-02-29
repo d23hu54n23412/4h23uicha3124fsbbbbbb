@@ -38,6 +38,7 @@ function ProxyPart:Link(Part)
     if not self.Part then
         return
     end
+    self.Part.Parent = game:GetService("Workspace")
     if self.Linking then
         self.Linking:Disconnect()
     end
