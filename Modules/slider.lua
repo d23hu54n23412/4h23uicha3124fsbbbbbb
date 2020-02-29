@@ -27,7 +27,7 @@ function slider:Track()
 		Circle.Position = UDim2.new(percent,0,.5,0)
         self.Ui.SliderBar.Size = UDim2.new(percent, 0, 0.1, 0)
 		if #self.functions > 0 then
-			local val = 0 + ((self.maximum - self.minimum) * percent)
+			local val = self.minimum + ((self.maximum - self.minimum) * percent)
             for _, func in pairs(self.functions) do
                 if self.Ui:FindFirstChild("Count") then
                     self.Ui.Count.Position = self.Ui.Circle.Position + UDim2.new(0, 0, 0.583, 0)
