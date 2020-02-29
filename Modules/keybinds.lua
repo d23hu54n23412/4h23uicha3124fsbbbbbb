@@ -41,7 +41,6 @@ UserInputService.InputBegan:connect(function(input)
     if keyCode and bindingKey and keyCode ~= Enum.KeyCode.Unknown then
         local ui = bindingKey[1]
         if ui then
-            print('d-2')
             if gg.ui.Menu.Alert.Visible == true then
                 gg.ui.Menu.Alert.Visible = false
             end

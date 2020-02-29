@@ -31,7 +31,7 @@ function HitboxExtender:On()
     end
 end
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Menu.Slider, 10, 1)
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Menu.Slider, 5, 10, 1)
 
 newSlider:Bind(function(val)
     for _,proxy in pairs(HitboxExtender.Parts) do

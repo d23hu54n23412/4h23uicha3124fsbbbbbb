@@ -27,7 +27,7 @@ function slider:Track()
 		Circle.Position = UDim2.new(percent,0,.5,0)
         self.Ui.SliderBar.Size = UDim2.new(percent, 0, 0.1, 0)
 		if #self.functions > 0 then
-			local val = 0 + ((self.maximum - 0) * percent)
+			local val = 0 + ((self.maximum - self.minimum) * percent)
             for _, func in pairs(self.functions) do
                 if self.Ui:FindFirstChild("Count") then
                     self.Ui.Count.Position = self.Ui.Circle.Position + UDim2.new(0, 0, 0.583, 0)
@@ -43,7 +43,7 @@ function slider:Track()
 	end)
 end
 
-function slider.new(ui, maximum, round)
+function slider.new(ui, minimum, maximum, round)
     if not ui or not maximum then
         return warn("Invalid specified UI/Maximum in slider")
     end
@@ -51,6 +51,7 @@ function slider.new(ui, maximum, round)
     local newSlider = setmetatable({
         Ui = ui,
         maximum = maximum,
+        minimum = minimum,
         functions = {},
         round = round,
     }, {
