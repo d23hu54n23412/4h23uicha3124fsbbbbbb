@@ -12,6 +12,11 @@ local menu = {
 local required = false
 
 gg.keybinds:Bind(Enum.KeyCode.E, function()
+    if menu.ui.Visible == true then
+        menu.ui.Visible = false
+    else
+        menu.ui.Visible = true
+    end
     menu.ui.Visible = not menu.ui.Visible
 
     if required == false then
