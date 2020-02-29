@@ -98,7 +98,7 @@ end
 
 -- Creating a keybind handler
 
-local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Menu.Keybind, "Hitbox Extender")]]
+local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Menu.Keybind, "Hitbox Extender")
 
 newKeybind:Bind(function(key)
     hitboxExtender.Keybind = key
