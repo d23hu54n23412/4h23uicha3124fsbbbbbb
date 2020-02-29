@@ -13,7 +13,7 @@ gg.load("Modules/Animations/Login/show")
 
 local loading = gg.ui:WaitForChild("Loading")
 
-local function loadModules()
+function loadModules()
     gg.keybinds = gg.load("Modules/keybinds")
     gg.client = game:GetService("Players").LocalPlayer
     gg.slider = gg.load("Modules/slider")
