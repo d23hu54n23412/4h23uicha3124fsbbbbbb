@@ -22,6 +22,7 @@ function keybinds.newButton(ui, value)
         if not ui then
             return warn("Invalid UI whilst creating new Keybind Button")
         end
+        print('d-1')
         local alert = gg.ui.Menu.Alert
         alert.Text = "Press any key to bind ".. value .."."
         alert.Visible = true
@@ -40,6 +41,7 @@ UserInputService.InputBegan:connect(function(input)
     if bindingKey then
         local ui = bindingKey[1]
         if ui then
+            print('d-2')
             if gg.ui.Menu.Alert.Visible == true then
                 gg.ui.Menu.Alert.Visible = false
             end
