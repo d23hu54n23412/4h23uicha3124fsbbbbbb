@@ -21,7 +21,7 @@ function ProxyPart:CreateOutline()
 
     local selectionBox = Instance.new("SelectionBox")
     selectionBox.Color3 = Color3.new(255, 255, 255)
-    selectionBox.LineTickness = 0.025
+    selectionBox.LineThickness = 0.025
     selectionBox.Adornee = self.Part
 
     self.selectionBox = selectionBox
