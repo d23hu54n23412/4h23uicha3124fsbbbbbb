@@ -26,8 +26,19 @@ function HitboxExtender:On()
         proxy:Link(humanoidRootPart)
         proxy:SetSize(Vector3.new(self.Size, self.Size, self.Size))
         proxy:CreateOutline()
+
+        table.insert(HitboxExtender.Parts, proxy)
     end
 end
+
+local newSlider = gg.slider.new(menu.ui.Menu.Slider, 10, 1)
+
+newSlider:Bind(function(val)
+    for _,proxy in pairs(HitboxExtender.Parts) do
+        HitboxExtender.Size = val
+        proxy:SetSize(Vector3.new(self.Size, self.Size, self.Size))
+    end
+end)
 
 UserInputService.InputBegan:connect(function(input)
     local KeyCode = input.KeyCode
