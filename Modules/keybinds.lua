@@ -38,7 +38,7 @@ end
 -- @listens InputService#Began
 UserInputService.InputBegan:connect(function(input)
     local keyCode = input.KeyCode
-    if bindingKey then
+    if keyCode and bindingKey then
         local ui = bindingKey[1]
         if ui then
             print('d-2')
