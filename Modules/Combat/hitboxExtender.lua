@@ -54,13 +54,17 @@ function hitboxExtender:On()
                     local Player = Players:GetPlayerFromCharacter(character)
                     if Player == gg.client then
                         local event = tool:FindFirstChild("swordEvent", true)
-                        if not event then
-                            event = tool:FindFirstChild("SwordEvent", true)
-                        end
-                        print('d-1')
                         if event and tick() - hitboxExtender.Cooldown >= .6 then
                             event:FireServer("dmg", humanoid)
                             hitboxExtender.Cooldown = tick()
+                        elseif not event then
+                            local event = tool:FindFirstChild("SwordEvent")
+                            if event then
+                                print("On lake tech")
+                                if tick() - hitboxExtender.Cooldown >= .6 then
+                                    event:FireServer(humanoid)
+                                end
+                            end
                         end
                     end
                 end
