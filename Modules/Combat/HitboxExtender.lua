@@ -6,7 +6,7 @@ local HitboxExtender = {
     Activated = false,
     Keybind = Enum.KeyCode.X,
     Parts = {},
-    Size = 5,
+    Size = 10,
 }
 
 local UserInputService = game:GetService("UserInputService")
