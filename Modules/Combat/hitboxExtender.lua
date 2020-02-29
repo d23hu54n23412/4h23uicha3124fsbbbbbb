@@ -6,7 +6,9 @@ local hitboxExtender = {
     Activated = false,
     Keybind = Enum.KeyCode.X,
     Parts = {},
+    DiedBinds = {}
     Size = 10,
+    Cooldown = tick(),
 }
 
 local UserInputService = game:GetService("UserInputService")
@@ -18,9 +20,14 @@ function hitboxExtender:Off()
         hitboxExtender.PlayerAdded:Disconnect()
         hitboxExtender.PlayerAdded = nil
     end
+    for _,func in pairs(hitboxExtender.DiedBinds) do
+        func:Disconnect()
+    end
     for _, proxy in pairs(hitboxExtender.Parts) do
         proxy:Destroy()
     end
+    hitboxExtender.Parts = {}
+    hitboxExtender.DiedBinds = {}
 end
 
 function hitboxExtender:On()
@@ -31,6 +38,7 @@ function hitboxExtender:On()
         end
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+        local humanoid = character:WaitForChild("Humanoid")
 
         local proxy = gg.proxyPart.new()
         proxy:Link(humanoidRootPart)
@@ -45,14 +53,17 @@ function hitboxExtender:On()
                     local character = tool.Parent
                     local Player = Players:GetPlayerFromCharacter(character)
                     if Player == gg.client then
-                        print("Execute damage on user")
+                        local event = tool:FindFirstChild("swordEvent")
+                        if event and tick() - hitboxExtender.Cooldown >= .6 then
+                            event:FireServer("dmg", humanoid)
+                            hitboxExtender.Cooldown = tick()
+                        end
                     end
                 end
             end
         end)
 
-        local humanoid = character:WaitForChild("Humanoid")
-        humanoid.Died:Connect(function()
+        local deathBind = humanoid.Died:Connect(function()
             proxy:Destroy()
             for i,v in pairs(hitboxExtender.Parts) do
                 if v == proxy then
@@ -60,6 +71,8 @@ function hitboxExtender:On()
                 end
             end
         end)
+
+        table.insert(hitboxExtender.DiedBinds, deathBind)
 
         table.insert(hitboxExtender.Parts, proxy)
     end
