@@ -11,7 +11,7 @@ local UserInputService = game:GetService("UserInputService")
 -- Returning table, ie; Modular setup, contains the users
 -- bindings as well as the functions to change binds
 local keybinds = {
-    binds = {} -- @BINDS
+    binds = {}, -- @BINDS
     functionNames = {} -- @NAMES
 }
 
