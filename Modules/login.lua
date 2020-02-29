@@ -13,13 +13,18 @@ gg.load("Modules/Animations/Login/show")
 
 local loading = gg.ui:WaitForChild("Loading")
 
+local function loadModules()
+    gg.keybinds = gg.load("Modules/keybinds")
+    gg.client = game:GetService("Players").LocalPlayer
+    gg.slider = gg.load("Modules/slider")
+    gg.proxyPart = gg.load("Utilities/ProxyPart")
+    gg.load("Modules/menu")
+end
+
 loading.Input.FocusLost:connect(function()
     local response = loading.Input.Text
     if response == "test" then
-        gg.keybinds = gg.load("Modules/keybinds")
-        gg.client = game:GetService("Players").LocalPlayer
-        gg.slider = gg.load("Modules/slider")
-        gg.load("Modules/menu")
+        loadModules()
         gg.load("Modules/Animations/Login/hide")
     end
 end)

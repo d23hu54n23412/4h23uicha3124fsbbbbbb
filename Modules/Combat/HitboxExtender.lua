@@ -6,17 +6,27 @@ local HitboxExtender = {
     Activated = false,
     Keybind = Enum.Keybind.X,
     Parts = {},
+    Size = 5,
 }
 
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
 
 function HitboxExtender:Off()
     
 end
 
 function HitboxExtender:On()
+    for _, player in pairs(Players:GetPlayers()) do
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 
+        local proxy = gg.proxyPart.new()
+        proxy:Link(humanoidRootPart)
+        proxy:SetSize(Vector3.new(self.Size, self.Size, self.Size))
+        proxy:CreateOutline()
+    end
 end
 
 UserInputService.InputBegan:connect(function(input)
