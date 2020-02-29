@@ -51,7 +51,7 @@ function slider.new(ui, maximum, round)
     local newSlider = setmetatable({
         Ui = ui,
         maximum = maximum,
-        functions = {}
+        functions = {},
         round = round,
     }, {
         __index = function(self, index)
