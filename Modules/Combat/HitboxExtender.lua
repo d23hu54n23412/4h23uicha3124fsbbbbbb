@@ -4,7 +4,7 @@
 
 local HitboxExtender = {
     Activated = false,
-    Keybind = Enum.Keybind.X,
+    Keybind = Enum.KeyCode.X,
     Parts = {},
     Size = 5,
 }
@@ -14,7 +14,7 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 
 function HitboxExtender:Off()
-    
+
 end
 
 function HitboxExtender:On()
