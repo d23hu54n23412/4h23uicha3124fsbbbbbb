@@ -26,8 +26,8 @@ function keybinds.newButton(ui, value)
         alert.Text = "Press any key to bind ".. value .."."
         alert.Visible = true
 
-        local currentKeybind = Enum.KeyCode[ui.Keybind.Text]
-        bindingKey = {ui, currentKeybind}
+        --local currentKeybind = Enum.KeyCode[ui.Keybind.Text]
+        bindingKey = {ui}
     end)
 end
 
@@ -39,8 +39,7 @@ UserInputService.InputBegan:connect(function(input)
     local keyCode = input.KeyCode
     if bindingKey then
         local ui = bindingKey[1]
-        local currentKeybind = bindingKey[2]
-        if ui and currentKeybind then
+        if ui then
             if gg.ui.Menu.Alert.Visible == true then
                 gg.ui.Menu.Alert.Visible = false
             end
