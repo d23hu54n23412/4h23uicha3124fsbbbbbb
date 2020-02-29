@@ -53,7 +53,7 @@ function hitboxExtender:On()
                     local character = tool.Parent
                     local Player = Players:GetPlayerFromCharacter(character)
                     if Player == gg.client then
-                        local event = tool:FindFirstChild("swordEvent", true)
+                        local event = tool:FindFirstChild("swordEvent", true) or tool:FindFirstChild("SwordEvent", true)
                         if event and tick() - hitboxExtender.Cooldown >= .6 then
                             event:FireServer("dmg", humanoid)
                             hitboxExtender.Cooldown = tick()
