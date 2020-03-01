@@ -6,7 +6,9 @@
 
 local lastHit = tick()
 
-return function(humanoid, part, cooldown)
+local damage = {}
+
+function damage.execute(humanoid, part, cooldown)
     if not part:IsA("Tool") then
         return
     end
@@ -31,3 +33,5 @@ return function(humanoid, part, cooldown)
         lastHit = tick()
     end
 end
+
+return damage
