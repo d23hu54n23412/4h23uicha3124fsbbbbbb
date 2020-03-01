@@ -7,7 +7,7 @@
 local lastHit = tick()
 
 return function(humanoid, part, cooldown)
-    if not part:IsA("Tool") then
+    if not part.Parent:IsA("Tool") then
         return
     end
     local client = gg.client
