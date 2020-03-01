@@ -9,6 +9,7 @@ local hitboxExtender = {
     DiedBinds = {},
     Size = 10,
     Cooldown = tick(),
+    CharacterAdded = {}
 }
 
 local UserInputService = game:GetService("UserInputService")
@@ -19,6 +20,9 @@ function hitboxExtender:Off()
     if hitboxExtender.PlayerAdded then
         hitboxExtender.PlayerAdded:Disconnect()
         hitboxExtender.PlayerAdded = nil
+    end
+    for _, added in pairs(hitboxExtender.CharacterAdded) do
+        added:Disconnect()
     end
     for _,func in pairs(hitboxExtender.DiedBinds) do
         func:Disconnect()
@@ -60,13 +64,18 @@ function hitboxExtender:On()
 
     for _, player in pairs(Players:GetPlayers()) do
         createHitbox(player)
+        local added = player.CharacterAdded:Connect(function()
+            createHitbox(player)
+        end)
+        table.insert(hitboxExtender.CharacterAdded, added)
     end
 
     hitboxExtender.PlayerAdded = Players.PlayerAdded:connect(function(player)
         createHitbox(player)
-        player.CharacterAdded:Connect(function()
+        local added = player.CharacterAdded:Connect(function()
             createHitbox(player)
         end)
+        table.insert(hitboxExtender.CharacterAdded, added)
     end)
 end
 

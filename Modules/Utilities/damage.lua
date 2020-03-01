@@ -24,10 +24,11 @@ return function(humanoid, part, cooldown)
         local event = tool:FindFirstChild("swordEvent", true)
         if event and tick() - lastHit >= cooldown then
             event:FireServer("dmg", humanoid)
+            lastHit = tick()
         elseif tool:FindFirstChild("SwordEvent") then -- Lake Tech
             event = tool:FindFirstChild("SwordEvent")
             event:FireServer(humanoid)
+            lastHit = tick()
         end
-        lastHit = tick()
     end
 end
