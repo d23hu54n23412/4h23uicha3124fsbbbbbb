@@ -46,37 +46,11 @@ function hitboxExtender:On()
         proxy:CreateOutline()
 
         proxy:BindTouch(function(part)
-            local tool = part.Parent
-            if tool:IsA("Tool") then
-                local tip = tool:FindFirstChild("Tip")
-                if tip then
-                    local character = tool.Parent
-                    local Player = Players:GetPlayerFromCharacter(character)
-                    if Player == gg.client then
-                        local event = tool:FindFirstChild("swordEvent", true)
-                        if event and tick() - hitboxExtender.Cooldown >= .6 then
-                            event:FireServer("dmg", humanoid)
-                            hitboxExtender.Cooldown = tick()
-                        elseif not event then -- Lake tech detection
-                            local event = tool:FindFirstChild("SwordEvent")
-                            if event then
-                                if tick() - hitboxExtender.Cooldown >= .6 then
-                                    event:FireServer(humanoid)
-                                end
-                            end
-                        end
-                    end
-                end
-            end
+            gg.damage(humanoid, part, .66)
         end)
 
         local deathBind = humanoid.Died:Connect(function()
             proxy:Destroy()
-            for i,v in pairs(hitboxExtender.Parts) do
-                if v == proxy then
-                    table.remove(hitboxExtender.Parts, i)
-                end
-            end
         end)
 
         table.insert(hitboxExtender.DiedBinds, deathBind)

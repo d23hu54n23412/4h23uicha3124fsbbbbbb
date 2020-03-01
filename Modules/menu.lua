@@ -19,6 +19,7 @@ gg.keybinds:Bind(Enum.KeyCode.E, function()
     end
 
     if required == false then
+        gg.damage = gg.load("Utilities/damage")
         gg.load("Modules/Combat/hitboxExtender")
     end
 
