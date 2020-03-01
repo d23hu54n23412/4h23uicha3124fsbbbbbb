@@ -82,7 +82,7 @@ function proxyPart:Link(Part)
     self.Weld.C0 = self.Part.CFrame:Inverse() * Part.CFrame
 
     self.Weld.Part0 = self.Part
-    self.Weld.Part1 = Part.CFrame
+    self.Weld.Part1 = Part
 end
 
 function proxyPart.new()
