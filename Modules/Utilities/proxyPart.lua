@@ -27,9 +27,9 @@ function proxyPart:Destroy()
     if self.TouchedConnection then
         self.TouchedConnection:Disconnect()
     end
-    if self.Linking then
+    --[[if self.Linking then
         self.Linking:Disconnect()
-    end
+    end]]
     if self.selectionBox then
         self.selectionBox:Destroy()
     end
@@ -70,23 +70,25 @@ function proxyPart:Link(Part)
         return
     end
     self.Part.Parent = game:GetService("Workspace")
-    if self.Linking then
-        self.Linking:Disconnect()
+    if self.Weld then
+        self.Weld:Destroy()
     end
     self.Part.Transparency, self.Part.CanCollide = 1, false
-    self.Linking = RunService.RenderStepped:connect(function()
-        if not self.Part or not Part then
-            self.Linking:Disconnect()
-            return
-        end
-        self.Part.CFrame = Part.CFrame
-    end)
+    
+    self.Part.CFrame = Part.CFrame
+
+    self.Weld = Instance.new("Weld")
+    self.Weld.Parent = self.Part
+    self.Weld.C0 = self.Part.CFrame:Inverse() * Part.CFrame
+
+    self.Weld.Part0 = self.Part
+    self.Weld.Part1 = Part.CFrame
 end
 
 function proxyPart.new()
     return setmetatable({
         Part = Instance.new("Part"),
-        Linking = nil,
+        Weld = nil,
         TouchedBindings = {},
         TouchedConnection = nil
     }, {
