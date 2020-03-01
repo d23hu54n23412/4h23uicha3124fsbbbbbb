@@ -6,9 +6,7 @@
 
 local lastHit = tick()
 
-local damage = {}
-
-damage.execute = function(humanoid, part, cooldown)
+return function(humanoid, part, cooldown)
     if not part:IsA("Tool") then
         return
     end
@@ -26,12 +24,10 @@ damage.execute = function(humanoid, part, cooldown)
         local event = tool:FindFirstChild("swordEvent", true)
         if event and tick() - lastHit >= cooldown then
             event:FireServer("dmg", humanoid)
-        elseif tool:FindFirstChild("SwordEvent") -- Lake Tech
+        elseif tool:FindFirstChild("SwordEvent") then -- Lake Tech
             event = tool:FindFirstChild("SwordEvent")
             event:FireServer(humanoid)
         end
         lastHit = tick()
     end
 end
-
-return damage

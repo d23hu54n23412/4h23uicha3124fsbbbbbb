@@ -46,7 +46,7 @@ function hitboxExtender:On()
         proxy:CreateOutline()
 
         proxy:BindTouch(function(part)
-            gg.damage.execute(humanoid, part, .66)
+            gg.damage(humanoid, part, .66)
         end)
 
         local deathBind = humanoid.Died:Connect(function()
