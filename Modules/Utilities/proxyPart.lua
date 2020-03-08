@@ -9,13 +9,18 @@
 local proxyPart = {}
 local RunService = game:GetService("RunService")
 local links = {}
+local camera = workspace.CurrentCamera
 
 RunService.RenderStepped:Connect(function()
     for part1, part2 in pairs(links) do
         if not part1 or not part2 then
             return
         end
-        part1.CFrame = part2.CFrame
+        local _, proxyOnScreen = camera:WorldToScreenPoint(part1.Vector)
+        local _, playerOnScreen = camera:WorldToScreenPoint(part2.Vector)
+        if onScreen or playerOnScreen then
+            part1.CFrame = part2.CFrame
+        end
     end
 end)
 
