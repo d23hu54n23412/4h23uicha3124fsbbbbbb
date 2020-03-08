@@ -16,10 +16,13 @@ RunService.RenderStepped:Connect(function()
         if not part1 or not part2 then
             return
         end
-        local _, proxyOnScreen = camera:WorldToScreenPoint(part1.Position)
-        local _, playerOnScreen = camera:WorldToScreenPoint(part2.Position)
-        if onScreen or playerOnScreen then
-            part1.CFrame = part2.CFrame
+        local distance = (part1.Position - camera.CFrame.p).Magnitude
+            if distance < 100 then
+            local _, proxyOnScreen = camera:WorldToScreenPoint(part1.Position)
+            local _, playerOnScreen = camera:WorldToScreenPoint(part2.Position)
+            if onScreen or playerOnScreen then
+                part1.CFrame = part2.CFrame
+            end
         end
     end
 end)
