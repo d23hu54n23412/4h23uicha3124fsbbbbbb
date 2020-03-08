@@ -8,6 +8,16 @@
 
 local proxyPart = {}
 local RunService = game:GetService("RunService")
+local links = {}
+
+RunService.RenderStepped:Connect(function()
+    for part1, part2 in pairs(links) do
+        if not part1 or not part2 then
+            return
+        end
+        part1.CFrame = part2.CFrame
+    end
+end)
 
 function proxyPart:BindTouch(func)
     if not self.Part then
@@ -24,11 +34,11 @@ function proxyPart:BindTouch(func)
 end
 
 function proxyPart:Destroy()
+    if links[self.Part] then
+        links[self.Part] = nil
+    end
     if self.TouchedConnection then
         self.TouchedConnection:Disconnect()
-    end
-    if self.Linking then
-        self.Linking:Disconnect()
     end
     if self.selectionBox then
         self.selectionBox:Destroy()
@@ -70,23 +80,15 @@ function proxyPart:Link(Part)
         return
     end
     self.Part.Parent = game:GetService("Workspace")
-    if self.Linking then
-        self.Linking:Disconnect()
-    end
+
     self.Part.Transparency, self.Part.CanCollide = 1, false
-    self.Linking = RunService.RenderStepped:connect(function()
-        if not self.Part or not Part then
-            self.Linking:Disconnect()
-            return
-        end
-        self.Part.CFrame = Part.CFrame
-    end)
+
+    links[self.Part] = Part
 end
 
 function proxyPart.new()
     return setmetatable({
         Part = Instance.new("Part"),
-        Linking = nil,
         TouchedBindings = {},
         TouchedConnection = nil
     }, {
