@@ -22,6 +22,8 @@ RunService.RenderStepped:Connect(function()
         end
         local humanoidRootPart = char:WaitForChild("HumanoidRootPart")
         local distance = (part1.Position - humanoidRootPart.Position).Magnitude
+        print((part1.Position - humanoidRootPart.Position).Magnitude)
+        print(distance)
         if distance < 75 then
             local _, proxyOnScreen = camera:WorldToScreenPoint(part1.Position)
             local _, playerOnScreen = camera:WorldToScreenPoint(part2.Position)
