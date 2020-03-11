@@ -16,21 +16,10 @@ RunService.RenderStepped:Connect(function()
         if not part1 or not part2 then
             return
         end
-        local char = gg.client.Character
-        if not char then
-            return
-        end
-        local humanoidRootPart = char:WaitForChild("HumanoidRootPart")
-        local distance = (part1.Position - humanoidRootPart.Position).Magnitude
-        if distance < 75 then
-            local _, proxyOnScreen = camera:WorldToScreenPoint(part1.Position)
-            local _, playerOnScreen = camera:WorldToScreenPoint(part2.Position)
-            if onScreen or playerOnScreen then
-                part1.Parent = workspace
-                part1.CFrame = part2.CFrame
-            end
-        else
-            part1.Parent = nil
+        local _, proxyOnScreen = camera:WorldToScreenPoint(part1.Position)
+        local _, playerOnScreen = camera:WorldToScreenPoint(part2.Position)
+        if onScreen or playerOnScreen then
+            part1.CFrame = part2.CFrame
         end
     end
 end)

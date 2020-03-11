@@ -101,6 +101,8 @@ end)
 -- TODO // remake this section to be universal using Keybinds.lua
 
 UserInputService.InputBegan:connect(function(input)
+    local TextBoxFocused = UserInputService:GetFocusedTextBox()
+    if TextBoxFocused then return end
     local KeyCode = input.KeyCode
     if KeyCode == hitboxExtender.Keybind then
         if hitboxExtender.Activated == false then
