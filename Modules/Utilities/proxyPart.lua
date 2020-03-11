@@ -96,6 +96,7 @@ function proxyPart:Link(Part)
         return
     end
     self.Part.Parent = game:GetService("Workspace")
+    self.Part.Anchored = true
 
     self.Part.Transparency, self.Part.CanCollide = 1, false
 
