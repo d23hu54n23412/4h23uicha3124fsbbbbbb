@@ -27,6 +27,7 @@ RunService.RenderStepped:Connect(function()
         if distance < 75 then
             local _, proxyOnScreen = camera:WorldToScreenPoint(part1.Position)
             local _, playerOnScreen = camera:WorldToScreenPoint(part2.Position)
+            print('d01')
             if onScreen or playerOnScreen then
                 part1.CFrame = part2.CFrame
             end
