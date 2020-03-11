@@ -22,15 +22,15 @@ RunService.RenderStepped:Connect(function()
         end
         local humanoidRootPart = char:WaitForChild("HumanoidRootPart")
         local distance = (part1.Position - humanoidRootPart.Position).Magnitude
-        print((part1.Position - humanoidRootPart.Position).Magnitude)
-        print(distance)
         if distance < 75 then
             local _, proxyOnScreen = camera:WorldToScreenPoint(part1.Position)
             local _, playerOnScreen = camera:WorldToScreenPoint(part2.Position)
-            print('d01')
             if onScreen or playerOnScreen then
+                part1.Parent = workspace
                 part1.CFrame = part2.CFrame
             end
+        else
+            part1.Parent = nil
         end
     end
 end)
