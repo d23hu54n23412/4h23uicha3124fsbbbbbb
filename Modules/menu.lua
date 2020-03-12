@@ -20,8 +20,10 @@ function bindButtons()
             if not menu.loadedButtons[button] then
                 local succ = gg.load("Modules/Combat/"..tostring(button.Name))
                 if succ then
+                    print("Binding Selection Button : "..button.Name )
                     local settings = menu.ui.Settings
                     button.MouseButton1Down:Connect(function()
+                        print("Showing : "..button.Name)
                         if settings:FindFirstChild(button.Name) then
                             for _,v in pairs(settings:GetChildren()) do
                                 v.Visible = false
