@@ -17,7 +17,7 @@ function bindButtons()
     local combatButtons = side.Combat
     for _,button in pairs(combatButtons:GetChildren()) do
         if button:IsA("TextButton") then
-            if not loadedButtons[button] then
+            if not menu.loadedButtons[button] then
                 local succ = gg.load("Modules/Combat/"..tostring(button.Name))
                 if succ then
                     local settings = menu.ui.Settings
@@ -30,7 +30,7 @@ function bindButtons()
                             print("Debug-1")
                         end
                     end)
-                    loadedButtons[button] = true
+                    menu.loadedButtons[button] = true
                 end
             end
         end
