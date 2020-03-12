@@ -50,6 +50,8 @@ end
 -- will then execute the desired function if needed.
 -- @listens InputService#Began
 UserInputService.InputBegan:connect(function(input)
+    local TextBoxFocused = UserInputService:GetFocusedTextBox()
+    if TextBoxFocused then return end
     local keyCode = input.KeyCode
     if keyCode and bindingKey and keyCode ~= Enum.KeyCode.Unknown then
         local ui = bindingKey[1]
