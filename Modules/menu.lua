@@ -25,7 +25,8 @@ function bindButtons()
                         for _,v in pairs(settings:GetChildren()) do
                             v.Visible = false
                         end
-                        settings[button.Name].Visible = true
+                        settings:FindFirstChild(button.Name).Visible = true
+                        print("Debug-1")
                     end
                 end)
             end
