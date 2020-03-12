@@ -41,8 +41,6 @@ gg.keybinds:Bind(Enum.KeyCode.E, function()
     menu.ui.Visible = not menu.ui.Visible
     if loaded == false then
         gg.kopis = gg.load("Modules/Utilities/kopis")
-        gg.load("Modules/Combat/hitboxExtender")
-        menu.loadedButtons[menu.ui.Side.Combat.hitboxExtender] = true
         bindButtons()
     end
     loaded = true
