@@ -17,18 +17,21 @@ function bindButtons()
     local combatButtons = side.Combat
     for _,button in pairs(combatButtons:GetChildren()) do
         if button:IsA("TextButton") then
-            local succ = gg.load("Modules/Combat/"..tostring(button.Name))
-            if succ then
-                local settings = menu.ui.Settings
-                button.MouseButton1Down:Connect(function()
-                    if settings:FindFirstChild(button.Name) then
-                        for _,v in pairs(settings:GetChildren()) do
-                            v.Visible = false
+            if not loadedButtons[button] then
+                local succ = gg.load("Modules/Combat/"..tostring(button.Name))
+                if succ then
+                    local settings = menu.ui.Settings
+                    button.MouseButton1Down:Connect(function()
+                        if settings:FindFirstChild(button.Name) then
+                            for _,v in pairs(settings:GetChildren()) do
+                                v.Visible = false
+                            end
+                            settings:FindFirstChild(button.Name).Visible = true
+                            print("Debug-1")
                         end
-                        settings:FindFirstChild(button.Name).Visible = true
-                        print("Debug-1")
-                    end
-                end)
+                    end)
+                    loadedButtons[button] = true
+                end
             end
         end
     end
