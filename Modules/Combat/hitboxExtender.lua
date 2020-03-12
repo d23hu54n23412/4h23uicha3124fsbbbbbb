@@ -50,7 +50,7 @@ function hitboxExtender:On()
         proxy:CreateOutline()
 
         proxy:BindTouch(function(part)
-            gg.damage(humanoid, part, .66)
+            gg.kopis.damage(humanoid, part, .66)
         end)
 
         local deathBind = humanoid.Died:Connect(function()
@@ -81,7 +81,7 @@ end
 
 -- Creating a keybind handler
 
-local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Menu.Keybind, "Hitbox Extender")
+local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Settings.hitboxExtender.Keybind, "Hitbox Extender")
 
 newKeybind:Bind(function(key)
     hitboxExtender.Keybind = key
@@ -89,7 +89,7 @@ end)
 
 -- Creating a slider
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Menu.Slider, 5, 15, 1)
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.hitboxExtender.Slider, 5, 15, 1)
 
 newSlider:Bind(function(val)
     hitboxExtender.Size = val

@@ -6,7 +6,15 @@
 
 local lastHit = tick()
 
-return function(humanoid, part, cooldown)
+local kopis = {
+    authorizedHit = true,
+    teamKill = true,
+}
+
+local __namecall = getrawmetatable(game).__namecall
+setreadonly(getrawmetatable(game), false)
+
+function kopis.damage(humanoid, part, cooldown)
     if not part.Parent:IsA("Tool") then
         return
     end
@@ -32,3 +40,17 @@ return function(humanoid, part, cooldown)
         end
     end
 end
+
+--[[getrawmetatable(game).__namecall = function(...)
+    if type(({...})[1]) == "userdata" then
+        if ({...})[1].Name and kopis.getEvent() and ({...})[1].Name == "RemoteEvent" then 
+            if ({...})[2] == "1" or "2" or "3" or "4" or "5" then
+                print("caught event")
+                return false
+            end
+        end
+    end
+    return __namecall(...)
+end]]
+
+return kopis

@@ -20,7 +20,15 @@ function environment.load(path)
     end
     if type(path) == "string" then
         print("Loading "..path)
-        return loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ..".lua"))()
+        local succ, error = pcall(function()
+            game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ..".lua")
+        end)
+        if succ then
+            return loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ..".lua"))()
+        else
+            warn("Error whilst loading '"..path.. "' : "..tostring(error))
+            return
+        end
     elseif type(path) == "number" then
         return game:GetObjects("rbxassetid://" .. path)[1]
     end

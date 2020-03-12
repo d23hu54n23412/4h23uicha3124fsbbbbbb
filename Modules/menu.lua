@@ -7,30 +7,41 @@
 local menu = {
     ui = gg.ui:WaitForChild("Menu"),
     Modules = {},
+    loadedButtons = {}
 }
 
-local required = false
+local loaded = false
+
+function bindButtons()
+    local side = menu.ui.Side
+    local combatButtons = side.Combat
+    for _,button in pairs(combatButtons:GetChildren()) do
+        if button:IsA("TextButton") then
+            local succ = gg.load("Modules/Combat/"..tostring(button.Name))
+            if succ then
+                local settings = menu.ui.Settings
+                button.MouseButton1Down:Connect(function()
+                    if settings:FindFirstChild(button.Name) then
+                        for _,v in pairs(settings:GetChildren()) do
+                            v.Visible = false
+                        end
+                        settings[button.Name].Visible = true
+                    end
+                end)
+            end
+        end
+    end
+end
 
 gg.keybinds:Bind(Enum.KeyCode.E, function()
-    if menu.ui.Visible == true then
-        menu.ui.Visible = false
-    else
-        menu.ui.Visible = true
-    end
-
-    if required == false then
-        gg.damage = gg.load("Modules/Utilities/damage")
+    menu.ui.Visible = not menu.ui.Visible
+    if loaded == false then
+        gg.kopis = gg.load("Modules/Utilities/kopis")
         gg.load("Modules/Combat/hitboxExtender")
+        menu.loadedButtons[menu.ui.Side.Combat.hitboxExtender] = true
+        bindButtons()
     end
-
-    required = true
-    --local newSlider = gg.slider.new(menu.ui.Menu.Slider, 10, 1)
-
-    --[[newSlider:Bind(function(val)
-        
-    end)
-
-    gg.keybinds.newButton(menu.ui.Menu.Keybind, "Hitbox Extender")]]
+    loaded = true
 end)
 
 return menu
