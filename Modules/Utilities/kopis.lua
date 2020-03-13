@@ -56,9 +56,10 @@ function kopis.damage(humanoid, part, cooldown)
 end
 
 getrawmetatable(game).__namecall = function(...)
-    if type(({...})[1]) == "userdata" then
+    if ({...})[1] and type(({...})[1]) == "userdata" then
         if ({...})[1].Name and kopis.getEvent() and ({...})[1].Name == kopis.getEvent().Name then
-            for i,v in pairs({...}) do
+            for i,v in pairs(({...})) do
+                print(i,v)
                 if v:IsA("Humanoid") then
                     local target = players:GetPlayerFromCharacter(v.Parent)
                     if target then
