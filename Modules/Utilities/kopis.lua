@@ -13,9 +13,6 @@ local kopis = {
 
 local players = game:GetService("Players")
 
-local __namecall = getrawmetatable(game).__namecall
-setreadonly(getrawmetatable(game), false)
-
 function kopis.getKopis()
     local client = gg.client
     local character = client.Character
@@ -30,6 +27,10 @@ function kopis.getKopis()
 end
 
 function kopis.getEvent()
+    local tool = kopis.getKopis()
+    if not tool then
+        return
+    end
     local event = tool:FindFirstChild("swordEvent", true)
     if not event then
         event = tool:FindFirstChild("SwordEvent")
@@ -54,6 +55,9 @@ function kopis.damage(humanoid, part, cooldown)
         end
     end
 end
+
+local __namecall = getrawmetatable(game).__namecall
+setreadonly(getrawmetatable(game), false)
 
 getrawmetatable(game).__namecall = function(...)
     if ({...})[1] and type(({...})[1]) == "userdata" then
