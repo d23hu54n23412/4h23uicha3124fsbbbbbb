@@ -23,6 +23,8 @@ end)
 
 -- Binding an input connection
 
+local label
+
 UserInputService.InputBegan:connect(function(input)
     local TextBoxFocused = UserInputService:GetFocusedTextBox()
     if TextBoxFocused then return end
@@ -30,8 +32,22 @@ UserInputService.InputBegan:connect(function(input)
     if KeyCode == teamKill.Keybind then
         if teamKill.Activated == false then
             teamKill:On()
+
+            if label then
+                label:Destroy()
+                label = nil
+            end
+
+            label = gg.ui.Templates.TextLabel:Clone()
+            label.Text = "Team Kill"
+            label.Parent = gg.ui.Overlay.Active
         else
             teamKill:Off()
+
+            if label then
+                label:Destroy()
+                label = nil
+            end
         end
         teamKill.Activated = not teamKill.Activated
     end
