@@ -81,7 +81,11 @@ getrawmetatable(game).__namecall = function(...)
                     end
                 end
             end
+            return __namecall(...)
+        else
+            return __namecall(...)
         end
+        return __namecall(...)
     end
     return __namecall(...)
 end
