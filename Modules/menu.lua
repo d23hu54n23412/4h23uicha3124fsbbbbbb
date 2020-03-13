@@ -36,9 +36,11 @@ function bindButtons()
                             v.Font = Enum.Font.SourceSansLight
                         end
                     end
-                    if menu.ui.Side.Combat:FindFirstChild(button.Name) then
-                        menu.ui.Side.Combat:FindFirstChild(button.Name).Font = Enum.Font.SourceSans
-                        
+                    local sideCombatButton = menu.ui.Side.Combat:FindFirstChild(button.Name)
+                    if sideCombatButton then
+                        sideCombatButton.Font = Enum.Font.SourceSans
+                        local currentSidePosition = menu.ui.Side.SideSelection.Position
+                        menu.ui.Side.SideSelection.Position = UDim2.new(0.986, 0, sideCombatButton.Position.Y.Scale)
                     end
                     menu.loadedButtons[button] = true
                 end
