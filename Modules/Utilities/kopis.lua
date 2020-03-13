@@ -56,38 +56,28 @@ function kopis.damage(humanoid, part, cooldown)
     end
 end
 
-local __namecall = getrawmetatable(game).__namecall
-setreadonly(getrawmetatable(game), false)
+local mt = getrawmetatable(game)
+setreadonly(mt, false)
 
-getrawmetatable(game).__namecall = function(...)
-    if type(({...})[1]) == "userdata" then
-        if ({...})[1].Name and ({...})[1].Name == "swordEvent" or ({...})[1].Name == "SwordEvent" then
-            print("Caught event firing")
-            for i,v in pairs(({...})) do
-                print(i,v)
-                if v:IsA("Humanoid") then
-                    local target = players:GetPlayerFromCharacter(v.Parent)
-                    if target then
-                        print("KOPIS TEAM KILL : ".. kopis.teamKill)
-                        if kopis.teamKill == true then
-                            local clientTeam = gg.client.Team
-                            local targetTeam = target.Team
-                            print("KOPIS TEAM SAME : ".. targetTeam == clientTeam)
-                            if targetTeam == clientTeam then
-                                print("NULLIFYING TK DAMAGE")
-                                return false
-                            end
-                        end
-                    end
-                end
-            end
-            return __namecall(...)
-        else
-            return __namecall(...)
+local old = mt.__namecall
+
+getrawmetatable(game).__namecall = function(self, ...) [nonamecall]
+    local arguments = {...}
+    if typeof(self) == "Instance" and self.Name and self.Name == "swordEvent" or self.Name == "SwordEvent" then
+        local humanoid
+        if arguments[1] and arguments[1].IsA and arguments[1]:IsA("Humanoid") then
+            humanoid = arguments[1]
+        elseif arguments[2] and arguments[2].IsA and arguments[2]:IsA("Humanoid") then
+            humanoid = arguments[2]
         end
-        return __namecall(...)
+        if humanoid then
+            if players:GetPlayerFromCharacter(humanoid.Parent).Team == gg.client.Team and kopis.teamKill == true then
+            	return false
+            end
+        end
     end
-    return __namecall(...)
+
+    return old(self, ...)
 end
 
 return kopis
