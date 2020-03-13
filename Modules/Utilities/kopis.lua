@@ -11,13 +11,12 @@ local kopis = {
     teamKill = true,
 }
 
+local players = game:GetService("Players")
+
 local __namecall = getrawmetatable(game).__namecall
 setreadonly(getrawmetatable(game), false)
 
-function kopis.damage(humanoid, part, cooldown)
-    if not part.Parent:IsA("Tool") then
-        return
-    end
+function kopis.getKopis()
     local client = gg.client
     local character = client.Character
     if not character then
@@ -28,6 +27,21 @@ function kopis.damage(humanoid, part, cooldown)
         return
     end
     local tool = tip.Parent
+end
+
+function kopis.getEvent()
+    local event = tool:FindFirstChild("swordEvent", true)
+    if not event then
+        event = tool:FindFirstChild("SwordEvent")
+    end
+    return event
+end
+
+function kopis.damage(humanoid, part, cooldown)
+    if not part.Parent:IsA("Tool") then
+        return
+    end
+    local tool = kopis.getKopis()
     if part == tip then
         local event = tool:FindFirstChild("swordEvent", true)
         if event and tick() - lastHit >= cooldown then
@@ -41,16 +55,29 @@ function kopis.damage(humanoid, part, cooldown)
     end
 end
 
---[[getrawmetatable(game).__namecall = function(...)
+getrawmetatable(game).__namecall = function(...)
     if type(({...})[1]) == "userdata" then
-        if ({...})[1].Name and kopis.getEvent() and ({...})[1].Name == "RemoteEvent" then 
-            if ({...})[2] == "1" or "2" or "3" or "4" or "5" then
-                print("caught event")
-                return false
+        if ({...})[1].Name and kopis.getEvent() and ({...})[1].Name == kopis.getEvent().Name then
+            for i,v in pairs({...}) do
+                if v:IsA("Humanoid") then
+                    local target = players:GetPlayerFromCharacter(v.Parent)
+                    if target then
+                        print("KOPIS TEAM KILL : ".. kopis.teamKill)
+                        if kopis.teamKill == true then
+                            local clientTeam = gg.client.Team
+                            local targetTeam = target.Team
+                            print("KOPIS TEAM SAME : ".. targetTeam == clientTeam)
+                            if targetTeam == clientTeam then
+                                print("NULLIFYING TK DAMAGE")
+                                return false
+                            end
+                        end
+                    end
+                end
             end
         end
     end
     return __namecall(...)
-end]]
+end
 
 return kopis

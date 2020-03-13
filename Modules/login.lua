@@ -23,7 +23,7 @@ end
 
 loading.Input.FocusLost:connect(function()
     local response = loading.Input.Text
-    if response == "env" then
+    if response == "wasd" then
         loadModules()
         gg.load("Modules/Animations/Login/hide")
     end
