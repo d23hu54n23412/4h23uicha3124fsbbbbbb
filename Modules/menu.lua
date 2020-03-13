@@ -23,7 +23,6 @@ function bindButtons()
                     print("Binding Selection Button : "..button.Name )
                     local settings = menu.ui.Settings
                     button.MouseButton1Down:Connect(function()
-                        print("Showing : "..button.Name)
                         if settings:FindFirstChild(button.Name) then
                             for _,v in pairs(settings:GetChildren()) do
                                 v.Visible = false
@@ -31,7 +30,7 @@ function bindButtons()
                             settings:FindFirstChild(button.Name).Visible = true
 
                             for i,v in pairs(menu.ui.Side.Combat:GetChildren()) do
-                                if v:IsA("Button") then
+                                if v:IsA("TextButton") then
                                     v.Font = Enum.Font.SourceSansLight
                                 end
                             end
