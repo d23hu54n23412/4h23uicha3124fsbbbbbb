@@ -60,7 +60,7 @@ local __namecall = getrawmetatable(game).__namecall
 setreadonly(getrawmetatable(game), false)
 
 getrawmetatable(game).__namecall = function(...)
-    if ({...})[1] and type(({...})[1]) == "userdata" then
+    if type(({...})[1]) == "userdata" then
         if ({...})[1].Name and ({...})[1].IsA and ({...})[1]:IsA("RemoteEvent") and kopis.getEvent() and ({...})[1].Name == kopis.getEvent().Name then
             print("Caught event firing")
             for i,v in pairs(({...})) do
