@@ -29,19 +29,20 @@ function bindButtons()
                                 v.Visible = false
                             end
                             settings:FindFirstChild(button.Name).Visible = true
+
+                            for i,v in pairs(menu.ui.Side.Combat:GetChildren()) do
+                                if v:IsA("Button") then
+                                    v.Font = Enum.Font.SourceSansLight
+                                end
+                            end
+                            local sideCombatButton = menu.ui.Side.Combat:FindFirstChild(button.Name)
+                            if sideCombatButton then
+                                sideCombatButton.Font = Enum.Font.SourceSans
+                                local currentSidePosition = menu.ui.Side.SideSelection.Position
+                                menu.ui.Side.SideSelection.Position = UDim2.new(0.986, 0, sideCombatButton.Position.Y.Scale)
+                            end
                         end
                     end)
-                    for i,v in pairs(menu.ui.Side.Combat:GetChildren()) do
-                        if v:IsA("Button") then
-                            v.Font = Enum.Font.SourceSansLight
-                        end
-                    end
-                    local sideCombatButton = menu.ui.Side.Combat:FindFirstChild(button.Name)
-                    if sideCombatButton then
-                        sideCombatButton.Font = Enum.Font.SourceSans
-                        local currentSidePosition = menu.ui.Side.SideSelection.Position
-                        menu.ui.Side.SideSelection.Position = UDim2.new(0.986, 0, sideCombatButton.Position.Y.Scale)
-                    end
                     menu.loadedButtons[button] = true
                 end
             end
