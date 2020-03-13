@@ -29,9 +29,17 @@ function bindButtons()
                                 v.Visible = false
                             end
                             settings:FindFirstChild(button.Name).Visible = true
-                            print("Debug-1")
                         end
                     end)
+                    for i,v in pairs(menu.ui.Side.Combat:GetChildren()) do
+                        if v:IsA("Button") then
+                            v.Font = Enum.Font.SourceSansLight
+                        end
+                    end
+                    if menu.ui.Side.Combat:FindFirstChild(button.Name) then
+                        menu.ui.Side.Combat:FindFirstChild(button.Name).Font = Enum.Font.SourceSans
+                        
+                    end
                     menu.loadedButtons[button] = true
                 end
             end
