@@ -13,8 +13,14 @@ function setSwingSpeed(speed)
     if not currentSwingSpeed then
         return
     end
-    for i,v in pairs(currentSwingSpeed) do
-        currentSwingSpeed[i] = speed
+    if type(speed) == "number" then
+        for i,v in pairs(currentSwingSpeed) do
+            currentSwingSpeed[i] = speed
+        end
+    else
+        for i,v in pairs(currentSwingSpeed) do
+            currentSwingSpeed[i] = speed[i]
+        end
     end
 end
 
@@ -23,7 +29,7 @@ function swingSpeed:On()
 end
 
 function swingSpeed:Off()
-    setSwingSpeed(1)
+    setSwingSpeed(gg.kopis.getDefaultSwingSpeeds())
 end
 
 -- Creating a slider
@@ -32,7 +38,9 @@ local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.swingSpeed.S
 
 newSlider:Bind(function(val)
     swingSpeed.SwingSpeed = val
-    setSwingSpeed(val)
+    if swingSpeed.Activated then
+        setSwingSpeed(val)
+    end
 end)
 
 local label

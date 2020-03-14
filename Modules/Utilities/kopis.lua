@@ -14,9 +14,21 @@ local kopis = {
 local swingSpeeds = {
     swingSpeeds = nil,
     kopis = nil,
+
+    default = {
+        1.5;
+        1;
+        1.25;
+        1.25;
+        1;
+    }
 }
 
 local players = game:GetService("Players")
+
+function kopis.getDefaultSwingSpeeds()
+    return swingSpeeds.default
+end
 
 function kopis.getKopis(searchPlayer)
     local client = gg.client
