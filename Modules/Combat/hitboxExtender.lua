@@ -118,7 +118,7 @@ UserInputService.InputBegan:connect(function(input)
             label = gg.ui.Templates.TextLabel:Clone()
             label.Text = "Hitbox Extender"
             label.Parent = gg.ui.Overlay:WaitForChild("Active")
-            label.Visible = = true
+            label.Visible = true
         else
             hitboxExtender:Off()
 
