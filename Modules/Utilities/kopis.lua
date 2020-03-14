@@ -104,6 +104,7 @@ function kopis.damage(humanoid, part, cooldown)
         return
     end
     local tool = kopis.getKopis()
+    local tip = tool:FindFirstChild("Tip", true)
     if part == tip then
         local event = tool:FindFirstChild("swordEvent", true)
         if event and tick() - lastHit >= cooldown then

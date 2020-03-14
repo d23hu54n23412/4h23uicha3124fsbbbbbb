@@ -50,6 +50,7 @@ function hitboxExtender:On()
         proxy:CreateOutline()
 
         proxy:BindTouch(function(part)
+            print("Touched")
             gg.kopis.damage(humanoid, part, .66)
         end)
 
