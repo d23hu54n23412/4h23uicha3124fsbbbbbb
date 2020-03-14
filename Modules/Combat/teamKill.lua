@@ -41,6 +41,7 @@ UserInputService.InputBegan:connect(function(input)
             label = gg.ui.Templates.TextLabel:Clone()
             label.Text = "Team Kill"
             label.Parent = gg.ui.Overlay:WaitForChild("Active")
+            label.Visible = true
         else
             teamKill:Off()
 

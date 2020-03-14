@@ -89,7 +89,7 @@ end)
 
 -- Creating a slider
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.hitboxExtender.Slider, 5, 15, 1)
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.hitboxExtender.Slider, 5, 15, 1) -- min, max, round
 
 newSlider:Bind(function(val)
     hitboxExtender.Size = val
@@ -118,6 +118,7 @@ UserInputService.InputBegan:connect(function(input)
             label = gg.ui.Templates.TextLabel:Clone()
             label.Text = "Hitbox Extender"
             label.Parent = gg.ui.Overlay:WaitForChild("Active")
+            label.Visible = = true
         else
             hitboxExtender:Off()
 

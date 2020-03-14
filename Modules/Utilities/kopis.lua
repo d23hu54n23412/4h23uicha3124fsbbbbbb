@@ -11,19 +11,34 @@ local kopis = {
     teamKill = true,
 }
 
+local swingSpeeds = {
+    swingSpeeds = nil,
+    kopis = nil,
+}
+
 local players = game:GetService("Players")
 
-function kopis.getKopis()
+function kopis.getKopis(searchPlayer)
     local client = gg.client
-    local character = client.Character
-    if not character then
-        return
+    if searchPlayer == true then
+        local tip = client:FindFirstChild("Tip", true)
+        if not tip or not tip.Parent:IsA("Tool") then
+            return
+        end
+        local tool = tip.Parent
+        return tool
+    else
+        local character = client.Character
+        if not character then
+            return
+        end
+        local tip = character:FindFirstChild("Tip", true)
+        if not tip or not tip.Parent:IsA("Tool") then
+            return
+        end
+        local tool = tip.Parent
+        return tool
     end
-    local tip = character:FindFirstChild("Tip", true)
-    if not tip or not tip.Parent:IsA("Tool") then
-        return
-    end
-    local tool = tip.Parent
 end
 
 function kopis.getEvent()
@@ -36,6 +51,26 @@ function kopis.getEvent()
         event = tool:FindFirstChild("SwordEvent")
     end
     return event
+end
+
+function kopis.getSwingSpeed()
+    local kopis = kopis.getKopis() or kopis.getKopis(true)
+    if not kopis then
+        return
+    end
+    if kopis == swingSpeeds.kopis then
+        return swingSpeeds.swingSpeeds
+    end
+    for _,v in pairs(getgc()) do
+        if type(v) == "function" and not is_synapse_function(v) then
+            for x,y in pairs(debug.getupvalues(v)) do
+                if type(y) == "table" and rawget(y,1) == 1.5 and rawget(y,2) == 1 and rawget(y, 3) == 1.25 and rawget(y,4) == 1.25 and rawget(y, 5)== 1 then
+                    swingSpeeds.kopis, swingSpeeds.swingSpeeds = kopis, y
+                    return y
+                end
+            end
+        end
+    end
 end
 
 function kopis.damage(humanoid, part, cooldown)
