@@ -6,6 +6,8 @@ local swingSpeed = {
     HitCooldown = 0.55,
 }
 
+local UserInputService = game:GetService("UserInputService")
+
 function setSwingSpeed(speed)
     local currentSwingSpeed = gg.kopis.getSwingSpeed()
     if not currentSwingSpeed then
