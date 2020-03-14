@@ -21,10 +21,16 @@ local swingSpeeds = {
         1.25;
         1.25;
         1;
-    }
+    },
+
+    cooldown = .66
 }
 
 local players = game:GetService("Players")
+
+function kopis.setDamageCooldown(cooldown)
+    swingSpeeds.cooldown = cooldown
+end
 
 function kopis.getDefaultSwingSpeeds()
     return swingSpeeds.default
@@ -99,7 +105,7 @@ function kopis.getSlashDelay()
     end
 end
 
-function kopis.damage(humanoid, part, cooldown)
+function kopis.damage(humanoid, part)
     if not part.Parent:IsA("Tool") then
         return
     end
@@ -107,10 +113,10 @@ function kopis.damage(humanoid, part, cooldown)
     local tip = tool:FindFirstChild("Tip", true)
     if part == tip then
         local event = tool:FindFirstChild("swordEvent", true)
-        if event and tick() - lastHit >= cooldown then
+        if event and tick() - lastHit >= swingSpeeds.cooldown then
             event:FireServer("dmg", humanoid)
             lastHit = tick()
-        elseif tool:FindFirstChild("SwordEvent") then -- Lake Tech
+        elseif tool:FindFirstChild("SwordEvent") and tick() - lastHit >= swingSpeeds.cooldown then -- Lake Tech
             event = tool:FindFirstChild("SwordEvent")
             event:FireServer(humanoid)
             lastHit = tick()

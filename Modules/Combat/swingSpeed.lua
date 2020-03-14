@@ -34,11 +34,15 @@ end
 function swingSpeed:On()
     setSwingSpeed(swingSpeed.SwingSpeed)
     setSwingCooldown(swingSpeed.HitCooldown)
+
+    kopis.setDamageCooldown(swingSpeed.HitCooldown)
 end
 
 function swingSpeed:Off()
     setSwingSpeed(gg.kopis.getDefaultSwingSpeeds())
     setSwingCooldown(0.55)
+
+    kopis.setDamageCooldown(0.66)
 end
 
 -- Creating a slider
@@ -58,6 +62,7 @@ newSlider:Bind(function(val)
     swingSpeed.HitCooldown = val
     if swingSpeed.Activated then
         setSwingCooldown(val)
+        kopis.setDamageCooldown(val)
     end
 end)
 
