@@ -74,11 +74,25 @@ function kopis.getSwingSpeed()
         return swingSpeeds.swingSpeeds
     end
     for _,v in pairs(getgc()) do
-        if type(v) == "function" and not is_synapse_function(v) then
+        if type(v) == "function" then
             for x,y in pairs(debug.getupvalues(v)) do
                 if type(y) == "table" and rawget(y,1) == 1.5 and rawget(y,2) == 1 and rawget(y, 3) == 1.25 and rawget(y,4) == 1.25 and rawget(y, 5)== 1 then
                     swingSpeeds.kopis, swingSpeeds.swingSpeeds = kopis, y
                     return y
+                end
+            end
+        end
+    end
+end
+
+function kopis.getSlashDelay()
+    for _,v in pairs(getgc()) do
+        if type(v) == "function" then
+            for _,y in pairs(debug.getupvalues(v)) do
+                if type(y) == "table" then 
+                    if rawget(y, "slash") then 
+                        return y
+                    end
                 end
             end
         end

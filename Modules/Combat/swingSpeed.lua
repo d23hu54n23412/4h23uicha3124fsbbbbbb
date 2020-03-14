@@ -24,12 +24,21 @@ function setSwingSpeed(speed)
     end
 end
 
+function setSwingCooldown(val)
+    local currentDelay = gg.kopis.getSlashDelay()
+    if currentDelay then
+        currentDelay.slash = val
+    end
+end
+
 function swingSpeed:On()
     setSwingSpeed(swingSpeed.SwingSpeed)
+    setSwingCooldown(swingSpeed.HitCooldown)
 end
 
 function swingSpeed:Off()
     setSwingSpeed(gg.kopis.getDefaultSwingSpeeds())
+    setSwingCooldown(0.55)
 end
 
 -- Creating a slider
@@ -42,6 +51,16 @@ newSlider:Bind(function(val)
         setSwingSpeed(val)
     end
 end)
+
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.swingSpeed.DelaySlider, 0, 1, 3) -- min, max, round
+
+newSlider:Bind(function(val)
+    swingSpeed.HitCooldown = val
+    if swingSpeed.Activated then
+        setSwingCooldown(val)
+    end
+end)
+--
 
 local label
 
