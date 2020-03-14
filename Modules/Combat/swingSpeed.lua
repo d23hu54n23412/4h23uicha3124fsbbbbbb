@@ -60,7 +60,16 @@ newSlider:Bind(function(val)
         setSwingCooldown(val)
     end
 end)
---
+
+-- Creating keybind handler
+
+local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Settings.swingSpeed.Keybind, "Swing Speed")
+
+newKeybind:Bind(function(key)
+    swingSpeed.Keybind = key
+end)
+
+-- 
 
 local label
 
