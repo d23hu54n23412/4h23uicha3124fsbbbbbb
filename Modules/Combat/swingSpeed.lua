@@ -28,7 +28,7 @@ end
 
 -- Creating a slider
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.swingSpeed.SwingSlider, 0, 2, 0.1) -- min, max, round
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.swingSpeed.SwingSlider, 0, 2, 2) -- min, max, round
 
 newSlider:Bind(function(val)
     swingSpeed.SwingSpeed = val
