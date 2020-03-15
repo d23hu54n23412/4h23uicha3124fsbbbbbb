@@ -124,28 +124,34 @@ function kopis.damage(humanoid, part)
     end
 end
 
+
+-- Calamari Support <3 Devv
+
 local mt = getrawmetatable(game)
+local old = mt.__namecall
 setreadonly(mt, false)
 
-local old = mt.__namecall
-
-getrawmetatable(game).__namecall = function(self, ...) [nonamecall]
-    local arguments = {...}
-    if typeof(self) == "Instance" and self.Name and self.Name == "swordEvent" or self.Name == "SwordEvent" then
-        local humanoid
-        if arguments[1] and arguments[1].IsA and arguments[1]:IsA("Humanoid") then
-            humanoid = arguments[1]
-        elseif arguments[2] and arguments[2].IsA and arguments[2]:IsA("Humanoid") then
-            humanoid = arguments[2]
-        end
-        if humanoid then
-            if players:GetPlayerFromCharacter(humanoid.Parent).Team == gg.client.Team and kopis.teamKill == true then
-            	return false
+if getreg().Calamari__namecall then -- is using calamar
+    -- Add calamari TK support here (eventually)
+else
+    getrawmetatable(game).__namecall = function(self, ...) [nonamecall]
+        local arguments = {...}
+        if typeof(self) == "Instance" and self.Name and self.Name == "swordEvent" or self.Name == "SwordEvent" then
+            local humanoid
+            if arguments[1] and arguments[1].IsA and arguments[1]:IsA("Humanoid") then
+                humanoid = arguments[1]
+            elseif arguments[2] and arguments[2].IsA and arguments[2]:IsA("Humanoid") then
+                humanoid = arguments[2]
+            end
+            if humanoid then
+                if players:GetPlayerFromCharacter(humanoid.Parent).Team == gg.client.Team and kopis.teamKill == true then
+                    return false
+                end
             end
         end
-    end
 
-    return old(self, ...)
+        return old(self, ...)
+    end
 end
 
 return kopis
