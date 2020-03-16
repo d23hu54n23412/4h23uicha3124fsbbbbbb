@@ -87,13 +87,14 @@ function proxyPart:Link(Part, Weld)
 
     self.Part.Parent = game:GetService("Workspace")
     self.Part.Transparency, self.Part.CanCollide = 1, false
-    
+
     if Weld then
         self.Part.CFrame = Part.CFrame
         local Weld = Instance.new("Weld")
         Weld.C0 = Part.CFrame:Inverse() * self.Part.CFrame
         Weld.Part0 = Part
         Weld.Part1 = self.Part
+        Weld.Parent = self.Part
     else
         self.Part.Anchored = true
         links[self.Part] = Part
