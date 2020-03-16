@@ -145,16 +145,6 @@ else
             elseif arguments[2] and arguments[2].IsA and arguments[2]:IsA("Humanoid") then
                 humanoid = arguments[2]
             end
-            if not humanoid and arguments[1] == "metal" then
-                if gg.getShieldBypassData().Activated then
-                    local chanceNum = math.random(0, 100)
-                    if chanceNum <= gg.getShieldBypassData().Chance then
-                        kopis.damage(humanoid, kopis.getKopis():WaitForChild("Tip"))
-                        lastCrit = tick()
-                        lastHit = tick()
-                    end
-                end
-            end
             if humanoid and players:GetPlayerFromCharacter(humanoid.Parent) then
                 if players:GetPlayerFromCharacter(humanoid.Parent).Team == gg.client.Team and kopis.teamKill == true then
                     return false
