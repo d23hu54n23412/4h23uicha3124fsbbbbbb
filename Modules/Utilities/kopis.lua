@@ -145,18 +145,19 @@ else
             elseif arguments[2] and arguments[2].IsA and arguments[2]:IsA("Humanoid") then
                 humanoid = arguments[2]
             end
-            if humanoid then
+            if humanoid and players:GetPlayerFromCharacter(humanoid.Parent) then
                 if players:GetPlayerFromCharacter(humanoid.Parent).Team == gg.client.Team and kopis.teamKill == true then
                     return false
                 end
 
                 if gg.getCriticalHitData().Activated then
                     local chanceNum = math.random(0, 100)
-                    if chanceNum <= gg.getCriticalHitData().Chance and tick() - lastCrit >= gg.getCriticalHitData().Delay / 2 then
+                    if chanceNum <= gg.getCriticalHitData().Chance and tick() - lastCrit >= gg.getCriticalHitData().Delay - .1 then
                         spawn(function()
                             wait(gg.getCriticalHitData().Delay)
                             print("Executing Critical Damage")
                             kopis.damage(humanoid, kopis.getKopis():WaitForChild("Tip"))
+                            lastCrit = tick()
                         end)
                     end
                 end
