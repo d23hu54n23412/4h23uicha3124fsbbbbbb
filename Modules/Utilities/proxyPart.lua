@@ -78,9 +78,6 @@ function proxyPart:SetSize(Vector, Offset)
         return
     end
     self.Part.Size = Vector
-    if Offset then
-        self.Part.Position = self.Part.Position + Vector3.new(0, 0, (Offset / 2) - 2)
-    end
 end
 
 function proxyPart:Link(Part, Weld, Offset)
@@ -93,12 +90,6 @@ function proxyPart:Link(Part, Weld, Offset)
 
     if Weld then
         self.Part.CFrame = Part.CFrame
-
-        if Offset then
-            self.Part.Position = self.Part.Position + Vector3.new(0, 0, (Offset / 2) - 2)
-            self.Offset = Offset
-        end
-
         local Weld = Instance.new("Weld")
         Weld.C0 = Part.CFrame:Inverse() * self.Part.CFrame
         Weld.Part0 = Part
