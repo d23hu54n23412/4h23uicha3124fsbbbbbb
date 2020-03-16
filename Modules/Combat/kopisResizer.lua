@@ -9,6 +9,8 @@ local kopisResizer = {
     Connection = nil,
 }
 
+local UserInputService = game:GetService("UserInputService")
+
 function kopisResizer:On()
     local kopis = gg.kopis.getKopis()
     if kopis then
