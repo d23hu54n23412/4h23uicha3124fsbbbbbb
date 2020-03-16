@@ -17,8 +17,8 @@ function kopisResizer:On()
 
     local function createProxy(kopis)
         local proxy = gg.proxyPart.new()
-        proxy:Link(kopis:WaitForChild("Tip"), true)
-        proxy:SetSize(Vector3.new(self.Length, 0.538, self.Thickness))
+        proxy:Link(kopis:WaitForChild("Tip"), true, kopisResizer.Length)
+        proxy:SetSize(Vector3.new(self.Length, 0.538, self.Thickness), kopisResizer.Length)
         proxy:CreateOutline()
 
         kopisResizer.Proxy = proxy
@@ -75,7 +75,7 @@ local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.kopisResizer
 newSlider:Bind(function(val)
     kopisResizer.Length = val
     if kopisResizer.Activated and kopisResizer.Proxy then
-        kopisResizer.Proxy:SetSize(Vector3.new(kopisResizer.Length, 0.538, kopisResizer.Thickness))
+        kopisResizer.Proxy:SetSize(Vector3.new(kopisResizer.Length, 0.538, kopisResizer.Thickness), kopisResizer.Length)
     end
 end)
 
@@ -84,7 +84,7 @@ local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.kopisResizer
 newSlider:Bind(function(val)
     kopisResizer.Thickness = val
     if kopisResizer.Activated and kopisResizer.Proxy then
-        kopisResizer.Proxy:SetSize(Vector3.new(kopisResizer.Length, 0.538, kopisResizer.Thickness))
+        kopisResizer.Proxy:SetSize(Vector3.new(kopisResizer.Length, 0.538, kopisResizer.Thickness), kopisResizer.Length)
     end
 end)
 

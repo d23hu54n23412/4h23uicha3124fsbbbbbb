@@ -73,14 +73,17 @@ function proxyPart:CreateOutline()
     self.selectionBox = selectionBox
 end
 
-function proxyPart:SetSize(Vector)
+function proxyPart:SetSize(Vector, Offset)
     if not self.Part or not Vector then
         return
     end
     self.Part.Size = Vector
+    if Offset then
+        self.Part.Position = self.Part.Position + Vector3.new(0, (Offset / 2) - 2, 0)
+    end
 end
 
-function proxyPart:Link(Part, Weld)
+function proxyPart:Link(Part, Weld, Offset)
     if not self.Part then
         return
     end
@@ -90,6 +93,12 @@ function proxyPart:Link(Part, Weld)
 
     if Weld then
         self.Part.CFrame = Part.CFrame
+
+        if Offset then
+            self.Part.Position = self.Part.Position + Vector3.new(0, (Offset / 2) - 2, 0)
+            self.Offset = Offset
+        end
+
         local Weld = Instance.new("Weld")
         Weld.C0 = Part.CFrame:Inverse() * self.Part.CFrame
         Weld.Part0 = Part
@@ -105,7 +114,8 @@ function proxyPart.new()
     return setmetatable({
         Part = Instance.new("Part"),
         TouchedBindings = {},
-        TouchedConnection = nil
+        TouchedConnection = nil,
+        Offset = nil,
     }, {
         __index = function(self, index)
             if proxyPart[index] then
