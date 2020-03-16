@@ -2,28 +2,35 @@ local kopisResizer = {
     Activated = false,
     Keybind = Enum.KeyCode.B,
 
-    Length = 3,
+    Length = 7.5,
     Thickness = 1,
 
     Proxy = nil,
     Connection = nil,
+    Connection2 = nil,
 }
 
 local UserInputService = game:GetService("UserInputService")
 
 function kopisResizer:On()
     local kopis = gg.kopis.getKopis()
-    if kopis then
+
+    local function createProxy(kopis)
         local proxy = gg.proxyPart.new()
-        proxy:Link(kopis:WaitForChild("Tip"))
+        proxy:Link(kopis:WaitForChild("Tip"), true)
         proxy:SetSize(Vector3.new(self.Length, 0.538, self.Thickness))
         proxy:CreateOutline()
 
         kopisResizer.Proxy = proxy
     end
-    Connection = gg.client.CharacterAdded:Connect(function()
+
+    local function createSecondaryConnection()
         local Character = gg.client.Character or gg.Client.CharacterAdded:Wait()
-        Character.ChildAdded:Connect(function(obj)
+        if kopisResizer.Connection2 then
+            kopisResizer.Connection2:Disconnect()
+            kopisResizer.Connection2 = nil
+        end
+        kopisResizer.Connection2 = Character.ChildAdded:Connect(function(obj)
             if obj:IsA("Tool") then
                 local kopis = gg.kopis.getKopis()
                 if obj == kopis then
@@ -31,15 +38,19 @@ function kopisResizer:On()
                         kopisResizer.Proxy:Destroy()
                         kopisResizer.Proxy = nil
                     end
-                    local proxy = gg.proxyPart.new()
-                    proxy:Link(kopis:WaitForChild("Tip"))
-                    proxy:SetSize(Vector3.new(kopisResizer.Length, 0.538, kopisResizer.Thickness))
-                    proxy:CreateOutline()
-
-                    kopisResizer.Proxy = proxy
+                    createProxy(kopis)
                 end
             end
         end)
+    end
+
+    if kopis then
+        createProxy(kopis)
+    end
+
+    createSecondaryConnection()
+    kopisResizer.Connection = gg.client.CharacterAdded:Connect(function()
+        createSecondaryConnection()
     end)
 end
 
@@ -50,6 +61,10 @@ function kopisResizer:Off()
     if self.Connection then
         self.Connection:Disconnect()
         self.Connection = nil
+    end
+    if self.Connection2 then
+        self.Connection2:Disconnect()
+        self.Connection2 = nil
     end
 end
 

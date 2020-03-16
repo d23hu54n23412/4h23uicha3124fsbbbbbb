@@ -80,16 +80,24 @@ function proxyPart:SetSize(Vector)
     self.Part.Size = Vector
 end
 
-function proxyPart:Link(Part)
+function proxyPart:Link(Part, Weld)
     if not self.Part then
         return
     end
+
     self.Part.Parent = game:GetService("Workspace")
-    self.Part.Anchored = true
-
     self.Part.Transparency, self.Part.CanCollide = 1, false
-
-    links[self.Part] = Part
+    
+    if Weld then
+        self.Part.CFrame = Part.CFrame
+        local Weld = Instance.new("Weld")
+        Weld.C0 = Part.CFrame:Inverse() * self.Part.CFrame
+        Weld.Part0 = Part
+        Weld.Part1 = self.Part
+    else
+        self.Part.Anchored = true
+        links[self.Part] = Part
+    end
 end
 
 function proxyPart.new()
