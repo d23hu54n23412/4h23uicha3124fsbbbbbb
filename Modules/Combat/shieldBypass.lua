@@ -32,7 +32,7 @@ function shieldBypass:On()
                     local humanoid = obj.Parent.Parent:FindFirstChild("Humanoid")
                     gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
                 end
-            end
+            end)
         end
     end
 
