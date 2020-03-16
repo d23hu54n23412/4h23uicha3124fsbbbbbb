@@ -59,7 +59,7 @@ function shieldBypass:On()
     createSecondaryConnection()
     Connection = gg.client.CharacterAdded:Connect(function()
         createSecondaryConnection()
-    end
+    end)
 end
 
 function shieldBypass:Off()
