@@ -20,8 +20,7 @@ function kopisResizer:On()
         proxy:Link(kopis:WaitForChild("Tip"), true, kopisResizer.Length)
         proxy:SetSize(Vector3.new(self.Length, 0.538, self.Thickness), kopisResizer.Length)
         proxy:CreateOutline()
-
-        proxy:Bind(function(part)
+        proxy:BindTouch(function(part)
             local character = part.Parent
             if game:GetService("Players"):FindPlayerFromCharacter(character) then
                 local humanoid = character:WaitForChild("Humanoid")
