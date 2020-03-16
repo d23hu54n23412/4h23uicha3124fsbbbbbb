@@ -151,7 +151,7 @@ else
                 end
                 if gg.getCriticalHitData().Activated then
                     local chanceNum = math.random(0, 100)
-                    if chanceNum <= gg.getCriticalHitData().Chance and tick() - lastCrit >= gg.getCriticalHitData().Delay + .1 then
+                    if chanceNum <= gg.getCriticalHitData().Chance and tick() - lastCrit >= gg.getCriticalHitData().Delay - .1 then
                         spawn(function()
                             wait(gg.getCriticalHitData().Delay)
                             lastCrit = tick()
@@ -159,7 +159,6 @@ else
                         end)
                     end
                 end
-                lastHit = tick()
             end
         end
 
