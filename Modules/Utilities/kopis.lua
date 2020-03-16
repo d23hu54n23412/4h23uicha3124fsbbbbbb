@@ -155,7 +155,6 @@ else
                     if chanceNum <= gg.getCriticalHitData().Chance and tick() - lastCrit >= gg.getCriticalHitData().Delay + .1 then
                         spawn(function()
                             wait(gg.getCriticalHitData().Delay)
-                            print("Executing Critical Damage")
                             lastCrit = tick()
                             kopis.damage(humanoid, kopis.getKopis():WaitForChild("Tip"))
                         end)

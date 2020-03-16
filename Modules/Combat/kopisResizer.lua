@@ -21,6 +21,14 @@ function kopisResizer:On()
         proxy:SetSize(Vector3.new(self.Length, 0.538, self.Thickness), kopisResizer.Length)
         proxy:CreateOutline()
 
+        proxy:Bind(function(part)
+            local character = part.Parent
+            if game:GetService("Players"):FindPlayerFromCharacter(character) then
+                local humanoid = character:WaitForChild("Humanoid")
+                gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
+            end
+        end)
+
         kopisResizer.Proxy = proxy
     end
 

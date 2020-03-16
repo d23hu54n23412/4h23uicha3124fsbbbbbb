@@ -12,23 +12,15 @@ gg.getCriticalHitData = function()
     return criticalHits
 end
 
-function criticalHits:On()
-    -- Activated
-end
-
-function criticalHits:Off()
-    -- Deactivated
-end
-
 -- Creating a slider
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.criticalHits.ChanceSlider, 0, 100, 1, true) -- min, max, round
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.criticalHits.ChanceSlider, 0, 100, 0, true) -- min, max, round
 
 newSlider:Bind(function(val)
     criticalHits.Chance = val
 end)
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.criticalHits.DelaySlider, 0, 1, 3) -- min, max, round
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.criticalHits.DelaySlider, 0, 1, 1) -- min, max, round
 
 newSlider:Bind(function(val)
     criticalHits.Delay = val
@@ -53,8 +45,6 @@ UserInputService.InputBegan:connect(function(input)
     local KeyCode = input.KeyCode
     if KeyCode == criticalHits.Keybind then
         if criticalHits.Activated == false then
-            criticalHits:On()
-
             if label then
                 label:Destroy()
                 label = nil
@@ -65,8 +55,6 @@ UserInputService.InputBegan:connect(function(input)
             label.Parent = gg.ui.Overlay:WaitForChild("Active")
             label.Visible = true
         else
-            criticalHits:Off()
-
             if label then
                 label:Destroy()
                 label = nil
