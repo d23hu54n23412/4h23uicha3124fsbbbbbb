@@ -8,7 +8,7 @@ local lastHit = tick()
 
 local kopis = {
     authorizedHit = true,
-    teamKill = true,
+    teamKill = false,
 }
 
 local swingSpeeds = {
