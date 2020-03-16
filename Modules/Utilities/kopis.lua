@@ -156,8 +156,8 @@ else
                         spawn(function()
                             wait(gg.getCriticalHitData().Delay)
                             print("Executing Critical Damage")
-                            kopis.damage(humanoid, kopis.getKopis():WaitForChild("Tip"))
                             lastCrit = tick()
+                            kopis.damage(humanoid, kopis.getKopis():WaitForChild("Tip"))
                         end)
                     end
                 end
