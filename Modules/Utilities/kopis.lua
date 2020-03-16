@@ -125,6 +125,8 @@ function kopis.damage(humanoid, part)
 end
 
 
+local lastCrit = tick()
+
 -- Calamari Support <3 Devv
 
 local mt = getrawmetatable(game)
@@ -146,6 +148,17 @@ else
             if humanoid then
                 if players:GetPlayerFromCharacter(humanoid.Parent).Team == gg.client.Team and kopis.teamKill == true then
                     return false
+                end
+
+                if gg.getCriticalHitData().Activated then
+                    local chanceNum = math.random(0, 100)
+                    if chanceNum <= gg.getCriticalHitData().Chance and tick() - lastCrit >= gg.getCriticalHitData().Delay / 2 then
+                        spawn(function()
+                            wait(gg.getCriticalHitData().Delay)
+                            print("Executing Critical Damage")
+                            kopis.damage(humanoid, kopis.getKopis():WaitForChild("Tip"))
+                        end)
+                    end
                 end
             end
         end

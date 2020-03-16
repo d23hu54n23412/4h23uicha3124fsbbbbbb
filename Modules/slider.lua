@@ -35,7 +35,11 @@ function slider:Track()
                         local mult = 10 ^ (self.round or 0)
                         val = math.floor(val * mult + 0.5) / mult
                     end
-                    self.Ui.Count.Text = tostring(val)
+                    if self.percentage then
+                        self.Ui.Count.Text = tostring(val).."%"
+                    else
+                        self.Ui.Count.Text = tostring(val)
+                    end
                 end
                 func(val)
             end
@@ -43,7 +47,7 @@ function slider:Track()
 	end)
 end
 
-function slider.new(ui, minimum, maximum, round)
+function slider.new(ui, minimum, maximum, round, percentage)
     if not ui or not maximum then
         return warn("Invalid specified UI/Maximum in slider")
     end
@@ -54,6 +58,7 @@ function slider.new(ui, minimum, maximum, round)
         minimum = minimum,
         functions = {},
         round = round,
+        percentage = percentage,
     }, {
         __index = function(self, index)
             if slider[index] then
