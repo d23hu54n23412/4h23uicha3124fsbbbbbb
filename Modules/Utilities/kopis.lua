@@ -152,7 +152,7 @@ else
 
                 if gg.getCriticalHitData().Activated then
                     local chanceNum = math.random(0, 100)
-                    if chanceNum <= gg.getCriticalHitData().Chance and tick() - lastCrit >= gg.getCriticalHitData().Delay - .1 then
+                    if chanceNum <= gg.getCriticalHitData().Chance and tick() - lastCrit >= gg.getCriticalHitData().Delay + .1 then
                         spawn(function()
                             wait(gg.getCriticalHitData().Delay)
                             print("Executing Critical Damage")
