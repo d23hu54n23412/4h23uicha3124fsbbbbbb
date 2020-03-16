@@ -23,7 +23,7 @@ local swingSpeeds = {
         1;
     },
 
-    cooldown = .66
+    cooldown = .55
 }
 
 local players = game:GetService("Players")

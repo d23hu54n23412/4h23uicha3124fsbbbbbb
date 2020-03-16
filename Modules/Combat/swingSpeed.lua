@@ -4,6 +4,8 @@ local swingSpeed = {
 
     SwingSpeed = 1,
     HitCooldown = 0.55,
+
+    Connection = nil,
 }
 
 local UserInputService = game:GetService("UserInputService")
@@ -36,6 +38,15 @@ function swingSpeed:On()
     setSwingCooldown(swingSpeed.HitCooldown)
 
     gg.kopis.setDamageCooldown(swingSpeed.HitCooldown)
+
+    swingSpeed.Connection = gg.client.CharacterAdded:Connect(function()
+        local Character = gg.client.Character or gg.client.CharacterAdded:Wait()
+
+        setSwingSpeed(swingSpeed.SwingSpeed)
+        setSwingCooldown(swingSpeed.HitCooldown)
+
+        gg.kopis.setDamageCooldown(0.66)
+    end)
 end
 
 function swingSpeed:Off()
@@ -43,6 +54,11 @@ function swingSpeed:Off()
     setSwingCooldown(0.55)
 
     gg.kopis.setDamageCooldown(0.66)
+
+    if swingSpeed.Connection then
+        swingSpeed.Connection:Disconnect()
+        swingSpeed.Connection = nil
+    end
 end
 
 -- Creating a slider
