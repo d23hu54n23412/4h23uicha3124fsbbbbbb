@@ -159,6 +159,7 @@ else
                         end)
                     end
                 end
+                lastHit = tick()
             end
         end
 

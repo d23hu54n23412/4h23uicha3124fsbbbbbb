@@ -30,7 +30,10 @@ function shieldBypass:On()
             shieldBypass.TouchedConnection = tip.Touched:Connect(function(obj)
                 if obj.Material == Enum.Material.Metal or obj.Material == Enum.Material.DiamondPlate then
                     local humanoid = obj.Parent.Parent:FindFirstChild("Humanoid")
-                    gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
+                    local chanceNumber = math.random(0, 100)
+                    if chanceNumber <= shieldBypass.Chance then
+                        gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
+                    end
                 end
             end)
         end
