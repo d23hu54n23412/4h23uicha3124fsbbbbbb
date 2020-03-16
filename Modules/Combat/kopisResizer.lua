@@ -22,7 +22,7 @@ function kopisResizer:On()
         proxy:CreateOutline()
         proxy:BindTouch(function(part)
             local character = part.Parent
-            if game:GetService("Players"):FindPlayerFromCharacter(character) then
+            if game:GetService("Players"):GetPlayerFromCharacter(character) then
                 local humanoid = character:WaitForChild("Humanoid")
                 gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
             end
