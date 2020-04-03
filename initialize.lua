@@ -8,6 +8,8 @@ local environment = {
     modules = {}
 }
 
+hookfunction(error, warn)
+
 if getgenv().gg then
     return warn("Battlegrounds Zero Environment is already loaded")
 end
