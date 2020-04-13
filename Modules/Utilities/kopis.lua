@@ -149,7 +149,6 @@ end
 coroutine.wrap(function()
     local errorConnections = checkErrorConnections()
     while wait() and not errorConnections do
-        warn("[BGZERO] Parsing Error Checks")
         errorConnections = checkErrorConnections()
     end
 end)
