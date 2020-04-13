@@ -136,7 +136,8 @@ local function checkErrorConnections()
     local Connections = getconnections(game:GetService("ScriptContext").Error)
 
     if #Connections > 0 then
-		for ConnectionKey, Connection in pairs(Connections) do
+        for ConnectionKey, Connection in pairs(Connections) do
+            warn("Bypassed Adonis Error Connection.")
 			Connection:Disable()
 		end
 	else
