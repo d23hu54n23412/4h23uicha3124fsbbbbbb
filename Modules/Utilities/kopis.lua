@@ -110,6 +110,9 @@ function kopis.damage(humanoid, part)
         return
     end
     local tool = kopis.getKopis()
+    if not tool then
+        return
+    end
     local tip = tool:FindFirstChild("Tip", true)
     if part == tip then
         local event = tool:FindFirstChild("swordEvent", true)
@@ -126,6 +129,31 @@ end
 
 
 local lastCrit = tick()
+
+-- Bypassing Adonis Anti-Cheat (Error Detection)
+
+local function checkErrorConnections()
+    local Connections = getconnections(game:GetService("ScriptContext").Error)
+
+    if #Connections > 0 then
+		for ConnectionKey, Connection in pairs(Connections) do
+			Connection:Disable()
+		end
+	else
+		return false
+	end
+	
+	return true
+end
+
+coroutine.wrap(function()
+    local errorConnections = checkErrorConnections()
+    while wait() and not errorConnections do
+        warn("[BGZERO] Parsing Error Checks")
+        errorConnections = checkErrorConnections()
+    end
+end)
+
 
 -- Calamari Support <3 Devv
 
