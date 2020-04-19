@@ -14,6 +14,32 @@ end
 
 getgenv().gg = environment
 
+
+-- Bypassing Adonis Anti-Cheat (Error Detection)
+
+local function checkErrorConnections()
+    local Connections = getconnections(game:GetService("ScriptContext").Error)
+
+    if #Connections > 0 then
+        for ConnectionKey, Connection in pairs(Connections) do
+			Connection:Disable()
+		end
+	else
+		return false
+	end
+	
+	return true
+end
+
+spawn(function()
+    local errorConnections = checkErrorConnections()
+    while RunService.RenderStepped:Wait() do
+        if errorConnections then
+            errorConnections = checkErrorConnections()
+        end
+    end
+end)
+
 function environment.load(path)
     if not path then
         return warn("Invalid Pathway for loading module")

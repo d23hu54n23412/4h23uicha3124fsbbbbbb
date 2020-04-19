@@ -5,6 +5,7 @@
 --]]
 
 local lastHit = tick()
+local RunService = game:GetService("RunService")
 
 local kopis = {
     authorizedHit = true,
@@ -129,31 +130,6 @@ end
 
 
 local lastCrit = tick()
-
--- Bypassing Adonis Anti-Cheat (Error Detection)
-
-local function checkErrorConnections()
-    local Connections = getconnections(game:GetService("ScriptContext").Error)
-
-    if #Connections > 0 then
-        for ConnectionKey, Connection in pairs(Connections) do
-            warn("Bypassed Adonis Error Connection.")
-			Connection:Disable()
-		end
-	else
-		return false
-	end
-	
-	return true
-end
-
-coroutine.wrap(function()
-    local errorConnections = checkErrorConnections()
-    while wait() and not errorConnections do
-        errorConnections = checkErrorConnections()
-    end
-end)
-
 
 -- Calamari Support <3 Devv
 
