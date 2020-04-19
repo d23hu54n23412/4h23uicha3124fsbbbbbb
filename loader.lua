@@ -8,4 +8,4 @@
 
 ]]
 
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/initialize.lua"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BGZ501ca/master/initialize.lua"))()

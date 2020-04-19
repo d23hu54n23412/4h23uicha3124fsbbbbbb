@@ -47,10 +47,10 @@ function environment.load(path)
     if type(path) == "string" then
         print("Loading "..path)
         local succ, error = pcall(function()
-            game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ..".lua")
+            game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BGZ501ca/master/".. path ..".lua")
         end)
         if succ then
-            return loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BattlegroundsZero/master/".. path ..".lua"))()
+            return loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ToggledReach/BGZ501ca/master/".. path ..".lua"))()
         else
             warn("Error whilst loading '"..path.. "' : "..tostring(error))
             return
