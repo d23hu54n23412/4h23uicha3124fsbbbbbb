@@ -58,7 +58,7 @@ function accuracy:On()
             local inverse = targetCFrame:Inverse()
 
             Gyro.MaxTorque = Vector3.new(0, math.huge, 0)
-            Gyro.CFrame = CFrame.Angles(0, math.rad(180), 0) * cFrame
+            Gyro.CFrame = CFrame.Angles(0, math.rad(180), 0) * inverse
             
             spawn(function()
                 local savedCurrent = Current
