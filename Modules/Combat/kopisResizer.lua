@@ -24,7 +24,9 @@ function kopisResizer:On()
             local character = part.Parent
             if game:GetService("Players"):GetPlayerFromCharacter(character) then
                 local humanoid = character:WaitForChild("Humanoid")
-                gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
+                if gg.kopis.getKopis() then
+                    gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
+                end
             end
         end)
 

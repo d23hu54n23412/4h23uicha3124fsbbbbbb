@@ -8,6 +8,9 @@ local environment = {
     modules = {}
 }
 
+local RunService = game:GetService("RunService")
+hookfunction(error, warn)
+
 if getgenv().gg then
     return warn("Battlegrounds Zero Environment is already loaded")
 end
