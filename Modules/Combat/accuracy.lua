@@ -51,8 +51,7 @@ function accuracy:On()
                     end
                 end
             end
-
-            print("d-6")
+            
             if not target then
                 return
             end
