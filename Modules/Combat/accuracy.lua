@@ -11,13 +11,15 @@ local Gyro
 local Current = 0
 
 function accuracy:On()
+    print("d-1")
     InputConnection = UserInputService.InputBegan:connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            print("d-2")
             local kopis = gg.kopis.getKopis()
             if not kopis then
                 return
             end
-
+            print("d-3")
             Current = Current + 1
 
             local client = gg.client
@@ -26,12 +28,12 @@ function accuracy:On()
             if not clientCharacter then
                 return
             end
-
+            print("d-4")
             local clientRoot = clientCharacter:FindFirstChild("HumanoidRootPar")
             if not clientRoot then
                 return
             end
-
+            print("d-5")
             if not Gyro then
                 Gyro = Instance.new("BodyGyro")
                 Gyro.Parent = clientRoot
@@ -50,20 +52,22 @@ function accuracy:On()
                 end
             end
 
+            print("d-6")
             if not target then
                 return
             end
-
+            print("d-7")
             local targetCFrame = target.Character:FindFirstChild("HumanoidRootPart").CFrame
             local inverse = targetCFrame:Inverse()
 
             Gyro.MaxTorque = Vector3.new(0, math.huge, 0)
             Gyro.CFrame = CFrame.Angles(0, math.rad(180), 0) * inverse
-            
+            print("d-8")
             spawn(function()
                 local savedCurrent = Current
                 wait(.3)
                 if Current == savedCurrent then
+                    print("d-9")
                     Gyro.MaxTorque = Vector3.new(0, 0, 0)
                 end
             end)
