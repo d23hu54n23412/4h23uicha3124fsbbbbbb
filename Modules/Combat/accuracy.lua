@@ -37,8 +37,8 @@ function accuracy:On()
             if not Gyro then
                 Gyro = Instance.new("BodyGyro")
                 Gyro.Parent = clientRoot
-                Gyro.D = 0
-                Gyro.P = 60000
+                Gyro.D = 50
+                Gyro.P = 30000
             end
 
             local target, dis = nil, math.huge
@@ -60,7 +60,7 @@ function accuracy:On()
             local targetCFrame = target.Character:FindFirstChild("HumanoidRootPart").CFrame
             local inverse = targetCFrame:Inverse()
 
-            Gyro.MaxTorque = Vector3.new(0, math.huge, 0)
+            Gyro.MaxTorque = Vector3.new(0, 9999999, 0)
             Gyro.CFrame = CFrame.Angles(0, math.rad(180), 0) * inverse
             print("d-8")
             spawn(function()
