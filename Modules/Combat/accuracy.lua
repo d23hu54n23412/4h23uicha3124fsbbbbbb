@@ -29,7 +29,7 @@ function accuracy:On()
                 return
             end
             print("d-4")
-            local clientRoot = clientCharacter:FindFirstChild("HumanoidRootPar")
+            local clientRoot = clientCharacter:FindFirstChild("HumanoidRootPart")
             if not clientRoot then
                 return
             end
