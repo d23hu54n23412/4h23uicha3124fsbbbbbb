@@ -59,7 +59,7 @@ function accuracy:On()
             local targetCFrame = target.Character:FindFirstChild("HumanoidRootPart").CFrame
             local inverse = targetCFrame:Inverse()
 
-            Gyro.MaxTorque = Vector3.new(0, 9999999, 0)
+            Gyro.MaxTorque = Vector3.new(0, 20000, 0)
             Gyro.CFrame = CFrame.Angles(0, math.rad(180), 0) * inverse
             print("d-8")
             spawn(function()
