@@ -37,7 +37,7 @@ function accuracy:On()
             if not Gyro then
                 Gyro = Instance.new("BodyGyro")
                 Gyro.Parent = clientRoot
-                Gyro.D = 50
+                Gyro.D = 500
                 Gyro.P = 30000
             end
 
