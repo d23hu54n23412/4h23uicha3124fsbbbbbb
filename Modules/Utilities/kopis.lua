@@ -144,9 +144,9 @@ else
         local arguments = {...}
         if typeof(self) == "Instance" and self.Name and self.Name == "swordEvent" or self.Name == "SwordEvent" then
             local humanoid
-            if arguments[1] and arguments[1].IsA and arguments[1]:IsA("Humanoid") then
+            if arguments[1] and type(arguments[1]) ~= 'number' and arguments[1].IsA and arguments[1]:IsA("Humanoid") then
                 humanoid = arguments[1]
-            elseif arguments[2] and arguments[2].IsA and arguments[2]:IsA("Humanoid") then
+            elseif arguments[2] and type(arguments[1]) ~= 'number' and arguments[2].IsA and arguments[2]:IsA("Humanoid") then
                 humanoid = arguments[2]
             end
             if humanoid and players:GetPlayerFromCharacter(humanoid.Parent) then
