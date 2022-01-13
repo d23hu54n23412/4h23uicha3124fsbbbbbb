@@ -7,14 +7,14 @@
 local lastHit = tick()
 local RunService = game:GetService("RunService")
 
-local kopis = {
+local Steel Longsword = {
     authorizedHit = true,
     teamKill = false,
 }
 
 local swingSpeeds = {
     swingSpeeds = nil,
-    kopis = nil,
+    Steel Longsword = nil,
 
     default = {
         1.5;
@@ -29,15 +29,15 @@ local swingSpeeds = {
 
 local players = game:GetService("Players")
 
-function kopis.setDamageCooldown(cooldown)
+function Steel Longsword.setDamageCooldown(cooldown)
     swingSpeeds.cooldown = cooldown
 end
 
-function kopis.getDefaultSwingSpeeds()
+function Steel Longsword.getDefaultSwingSpeeds()
     return swingSpeeds.default
 end
 
-function kopis.getKopis(searchPlayer)
+function Steel Longsword.getSteel Longsword(searchPlayer)
     local client = gg.client
     if searchPlayer == true then
         local tip = client:FindFirstChild("Tip", true)
@@ -60,8 +60,8 @@ function kopis.getKopis(searchPlayer)
     end
 end
 
-function kopis.getEvent()
-    local tool = kopis.getKopis()
+function Steel Longsword.getEvent()
+    local tool = Steel Longsword.getSteel Longsword()
     if not tool then
         return
     end
@@ -72,19 +72,19 @@ function kopis.getEvent()
     return event
 end
 
-function kopis.getSwingSpeed()
-    local kopis = kopis.getKopis() or kopis.getKopis(true)
-    if not kopis then
+function Steel Longsword.getSwingSpeed()
+    local Steel Longsword = Steel Longsword.getSteel Longsword() or Steel Longsword.Steel Longsword(true)
+    if not Steel Longsword then
         return
     end
-    if kopis == swingSpeeds.kopis then
+    if Steel Longsword == swingSpeeds.Steel Longsword then
         return swingSpeeds.swingSpeeds
     end
     for _,v in pairs(getgc()) do
         if type(v) == "function" then
             for x,y in pairs(debug.getupvalues(v)) do
                 if type(y) == "table" and rawget(y,1) == 1.5 and rawget(y,2) == 1 and rawget(y, 3) == 1.25 and rawget(y,4) == 1.25 and rawget(y, 5)== 1 then
-                    swingSpeeds.kopis, swingSpeeds.swingSpeeds = kopis, y
+                    swingSpeeds.Steel Longsword, swingSpeeds.swingSpeeds = Steel Longsword, y
                     return y
                 end
             end
@@ -92,7 +92,7 @@ function kopis.getSwingSpeed()
     end
 end
 
-function kopis.getSlashDelay()
+function Steel Longsword.getSlashDelay()
     for _,v in pairs(getgc()) do
         if type(v) == "function" then
             for _,y in pairs(debug.getupvalues(v)) do
@@ -106,11 +106,11 @@ function kopis.getSlashDelay()
     end
 end
 
-function kopis.damage(humanoid, part)
+function Steel Longsword.damage(humanoid, part)
     if not part.Parent:IsA("Tool") then
         return
     end
-    local tool = kopis.getKopis()
+    local tool = Steel Longsword.getSteel Longsword()
     if not tool then
         return
     end
@@ -150,7 +150,7 @@ else
                 humanoid = arguments[2]
             end
             if humanoid and players:GetPlayerFromCharacter(humanoid.Parent) then
-                if players:GetPlayerFromCharacter(humanoid.Parent).Team == gg.client.Team and kopis.teamKill == true then
+                if players:GetPlayerFromCharacter(humanoid.Parent).Team == gg.client.Team and Steel Longsword.teamKill == true then
                     return false
                 end
                 if gg.getCriticalHitData().Activated then
@@ -159,7 +159,7 @@ else
                         spawn(function()
                             wait(gg.getCriticalHitData().Delay)
                             lastCrit = tick()
-                            kopis.damage(humanoid, kopis.getKopis():WaitForChild("Tip"))
+                            Steel Longsword.damage(humanoid, Steel Longsword.getSteel Longsword():WaitForChild("Tip"))
                         end)
                     end
                 end
@@ -170,4 +170,4 @@ else
     end
 end
 
-return kopis
+return Steel Longsword
