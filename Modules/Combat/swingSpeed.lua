@@ -11,7 +11,7 @@ local swingSpeed = {
 local UserInputService = game:GetService("UserInputService")
 
 function setSwingSpeed(speed)
-    local currentSwingSpeed = gg.kopis.getSwingSpeed()
+    local currentSwingSpeed = gg.Steel Longsword.getSwingSpeed()
     if not currentSwingSpeed then
         return
     end
@@ -27,7 +27,7 @@ function setSwingSpeed(speed)
 end
 
 function setSwingCooldown(val)
-    local currentDelay = gg.kopis.getSlashDelay()
+    local currentDelay = gg.Steel Longsword.getSlashDelay()
     if currentDelay then
         currentDelay.slash = val
     end
@@ -37,7 +37,7 @@ function swingSpeed:On()
     setSwingSpeed(swingSpeed.SwingSpeed)
     setSwingCooldown(swingSpeed.HitCooldown)
 
-    gg.kopis.setDamageCooldown(swingSpeed.HitCooldown)
+    gg.Steel Longsword.setDamageCooldown(swingSpeed.HitCooldown)
 
     swingSpeed.Connection = gg.client.CharacterAdded:Connect(function()
         local Character = gg.client.Character or gg.client.CharacterAdded:Wait()
@@ -45,15 +45,15 @@ function swingSpeed:On()
         setSwingSpeed(swingSpeed.SwingSpeed)
         setSwingCooldown(swingSpeed.HitCooldown)
 
-        gg.kopis.setDamageCooldown(0.66)
+        gg.Steel Longsword.setDamageCooldown(0.66)
     end)
 end
 
 function swingSpeed:Off()
-    setSwingSpeed(gg.kopis.getDefaultSwingSpeeds())
+    setSwingSpeed(gg.Steel Longsword.getDefaultSwingSpeeds())
     setSwingCooldown(0.55)
 
-    gg.kopis.setDamageCooldown(0.66)
+    gg.Steel Longsword.setDamageCooldown(0.66)
 
     if swingSpeed.Connection then
         swingSpeed.Connection:Disconnect()
@@ -78,7 +78,7 @@ newSlider:Bind(function(val)
     swingSpeed.HitCooldown = val
     if swingSpeed.Activated then
         setSwingCooldown(val)
-        gg.kopis.setDamageCooldown(val)
+        gg.Steel Longsword.setDamageCooldown(val)
     end
 end)
 
