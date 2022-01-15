@@ -1,4 +1,4 @@
-local shieldBypass = {
+local parryBypass = {
     Activated = false,
     Keybind = Enum.KeyCode.M,
 
@@ -12,27 +12,27 @@ local shieldBypass = {
 
 local UserInputService = game:GetService("UserInputService")
 
-gg.getShieldBypassData = function()
-    return shieldBypass
+gg.getParryBypassData = function()
+    return parryBypass
 end
 
-function shieldBypass:On()
+function parryBypass:On()
 
     function bindTouch()
-        local kopis = gg.kopis.getKopis()
-        local tip = kopis:FindFirstChild("Tip")
+        local Steel Longsword = gg.Steel Longsword.getSteel Longsword()
+        local tip = Steel Longsword:FindFirstChild("Tip")
         
         if tip then
-            if shieldBypass.TouchedConnection then
-                shieldBypass.TouchedConnection:Disconnect()
-                shieldBypass.TouchedConnection = nil
+            if parryBypass.TouchedConnection then
+                parryBypass.TouchedConnection:Disconnect()
+                parryBypass.TouchedConnection = nil
             end
-            shieldBypass.TouchedConnection = tip.Touched:Connect(function(obj)
+            parryBypass.TouchedConnection = tip.Touched:Connect(function(obj)
                 if obj.Material == Enum.Material.Metal or obj.Material == Enum.Material.DiamondPlate then
                     local humanoid = obj.Parent.Parent:FindFirstChild("Humanoid")
                     local chanceNumber = math.random(0, 100)
-                    if chanceNumber <= shieldBypass.Chance then
-                        gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
+                    if chanceNumber <= parryBypass.Chance then
+                        gg.Steel Longsword.damage(humanoid, gg.Steel Longsword.getSteel Longsword():WaitForChild("Tip"))
                     end
                 end
             end)
@@ -41,21 +41,21 @@ function shieldBypass:On()
 
     function createSecondaryConnection()
         local character = gg.client.Character or gg.client.CharacterAdded:Wait()
-        if shieldBypass.Connection2 then
-            shieldBypass.Connection2:Disconnect()
-            shieldBypass.Connection2 = nil
+        if parryBypass.Connection2 then
+            parryBypass.Connection2:Disconnect()
+            parryBypass.Connection2 = nil
         end
-        shieldBypass.Connection2 = character.ChildAdded:Connect(function(obj)
+        parryBypass.Connection2 = character.ChildAdded:Connect(function(obj)
             if obj:IsA("Tool") then
-                local kopis = gg.kopis.getKopis()
-                if obj == kopis then
+                local Steel Longsword = gg.Steel Longsword.getSteel Longsword()
+                if obj == Steel Longsword then
                     bindTouch()
                 end
             end
         end)
     end
 
-    if gg.kopis.getKopis() then
+    if gg.Steel Longsword.getSteel Longsword() then
         bindTouch()
     end
     
@@ -65,35 +65,35 @@ function shieldBypass:On()
     end)
 end
 
-function shieldBypass:Off()
-    if shieldBypass.Connection then
-        shieldBypass.Connection:Disconnect()
-        shieldBypass.Connection = nil
+function parryBypass:Off()
+    if parryBypass.Connection then
+        parryBypass.Connection:Disconnect()
+        parryBypass.Connection = nil
     end
-    if shieldBypass.Connection2 then
-        shieldBypass.Connection2:Disconnect()
-        shieldBypass.Connection2 = nil
+    if parryBypass.Connection2 then
+        parryBypass.Connection2:Disconnect()
+        parryBypass.Connection2 = nil
     end
-    if shieldBypass.TouchedConnection then
-        shieldBypass.TouchedConnection:Disconnect()
-        shieldBypass.TouchedConnection = nil
+    if parryBypass.TouchedConnection then
+        parryBypass.TouchedConnection:Disconnect()
+        parryBypass.TouchedConnection = nil
     end
 end
 
 -- Creating a slider
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.shieldBypass.Slider, 0, 100, 0, true) -- min, max, round
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.parryBypass.Slider, 0, 100, 0, true) -- min, max, round
 
 newSlider:Bind(function(val)
-    shieldBypass.Chance = val
+    parryBypass.Chance = val
 end)
 
 -- New Keybind
 
-local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Settings.shieldBypass.Keybind, "Critical Hits")
+local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Settings.parryBypass.Keybind, "Critical Hits")
 
 newKeybind:Bind(function(key)
-    shieldBypass.Keybind = key
+    parryBypass.Keybind = key
 end)
 
 -- TODO // remake this section to be universal using Keybinds.lua
@@ -104,17 +104,17 @@ UserInputService.InputBegan:connect(function(input)
     local TextBoxFocused = UserInputService:GetFocusedTextBox()
     if TextBoxFocused then return end
     local KeyCode = input.KeyCode
-    if KeyCode == shieldBypass.Keybind then
-        if shieldBypass.Activated == false then
+    if KeyCode == parryBypass.Keybind then
+        if parryBypass.Activated == false then
             if label then
                 label:Destroy()
                 label = nil
             end
 
-            shieldBypass:On()
+            parryBypass:On()
 
             label = gg.ui.Templates.TextLabel:Clone()
-            label.Text = "Shield Bypass"
+            label.Text = "Parry Bypass"
             label.Parent = gg.ui.Overlay:WaitForChild("Active")
             label.Visible = true
         else
@@ -122,10 +122,10 @@ UserInputService.InputBegan:connect(function(input)
                 label:Destroy()
                 label = nil
             end
-            shieldBypass:Off()
+            parryBypass:Off()
         end
-        shieldBypass.Activated = not shieldBypass.Activated
+        parryBypass.Activated = not parryBypass.Activated
     end
 end)
 
-return shieldBypass
+return parryBypass
