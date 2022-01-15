@@ -50,7 +50,7 @@ function hitboxExtender:On()
         proxy:CreateOutline()
 
         proxy:BindTouch(function(part)
-            gg.kopis.damage(humanoid, part, .66)
+            gg.Steel Longsword.damage(humanoid, part, .66)
         end)
 
         local deathBind = humanoid.Died:Connect(function()
