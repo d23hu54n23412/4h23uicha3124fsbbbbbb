@@ -1,4 +1,4 @@
-local kopisResizer = {
+local Steel LongswordResizer = {
     Activated = false,
     Keybind = Enum.KeyCode.B,
 
@@ -12,58 +12,58 @@ local kopisResizer = {
 
 local UserInputService = game:GetService("UserInputService")
 
-function kopisResizer:On()
-    local kopis = gg.kopis.getKopis()
+function Steel LongswordResizer:On()
+    local Steel Longsword = gg.Steel Longsword.getSteel Longsword()
 
-    local function createProxy(kopis)
+    local function createProxy(Steel Longsword)
         local proxy = gg.proxyPart.new()
-        proxy:Link(kopis:WaitForChild("Tip"), true, kopisResizer.Length)
-        proxy:SetSize(Vector3.new(self.Length, 0.538, self.Thickness), kopisResizer.Length)
+        proxy:Link(Steel Longsword:WaitForChild("Tip"), true, Steel LongswordResizer.Length)
+        proxy:SetSize(Vector3.new(self.Length, 0.538, self.Thickness), Steel LongswordResizer.Length)
         proxy:CreateOutline()
         proxy:BindTouch(function(part)
             local character = part.Parent
             if game:GetService("Players"):GetPlayerFromCharacter(character) then
                 local humanoid = character:WaitForChild("Humanoid")
-                if gg.kopis.getKopis() then
-                    gg.kopis.damage(humanoid, gg.kopis.getKopis():WaitForChild("Tip"))
+                if gg.Steel Longsword.getSteel Longsword() then
+                    gg.Steel Longsword.damage(humanoid, gg.Steel Longsword.getSteel Longsword():WaitForChild("Tip"))
                 end
             end
         end)
 
-        kopisResizer.Proxy = proxy
+        Steel LongswordResizer.Proxy = proxy
     end
 
     local function createSecondaryConnection()
         local Character = gg.client.Character or gg.Client.CharacterAdded:Wait()
-        if kopisResizer.Connection2 then
-            kopisResizer.Connection2:Disconnect()
-            kopisResizer.Connection2 = nil
+        if Steel LongswordResizer.Connection2 then
+            Steel LongswordResizer.Connection2:Disconnect()
+            Steel LongswordResizer.Connection2 = nil
         end
-        kopisResizer.Connection2 = Character.ChildAdded:Connect(function(obj)
+        Steel LongswordResizer.Connection2 = Character.ChildAdded:Connect(function(obj)
             if obj:IsA("Tool") then
-                local kopis = gg.kopis.getKopis()
-                if obj == kopis then
-                    if kopisResizer.Proxy then
-                        kopisResizer.Proxy:Destroy()
-                        kopisResizer.Proxy = nil
+                local Steel Longsword = gg.Steel Longsword.getSteel Longsword()
+                if obj == Steel Longsword then
+                    if Steel LongswordResizer.Proxy then
+                        Steel LongswordResizer.Proxy:Destroy()
+                        Steel LongswordResizer.Proxy = nil
                     end
-                    createProxy(kopis)
+                    createProxy(Steel Longsword)
                 end
             end
         end)
     end
 
-    if kopis then
-        createProxy(kopis)
+    if Steel Longsword then
+        createProxy(Steel Longsword)
     end
 
     createSecondaryConnection()
-    kopisResizer.Connection = gg.client.CharacterAdded:Connect(function()
+    Steel LongswordResizer.Connection = gg.client.CharacterAdded:Connect(function()
         createSecondaryConnection()
     end)
 end
 
-function kopisResizer:Off()
+function Steel LongswordResizer:Off()
     if self.Proxy then
         self.Proxy:Destroy()
     end
@@ -79,30 +79,30 @@ end
 
 -- Creating a slider
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.kopisResizer.LengthSlider, 0, 15, 2) -- min, max, round
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.Steel LongswordResizer.LengthSlider, 0, 15, 2) -- min, max, round
 
 newSlider:Bind(function(val)
-    kopisResizer.Length = val
-    if kopisResizer.Activated and kopisResizer.Proxy then
-        kopisResizer.Proxy:SetSize(Vector3.new(kopisResizer.Length, 0.538, kopisResizer.Thickness), kopisResizer.Length)
+    Steel LongswordResizer.Length = val
+    if Steel LongswordResizer.Activated and Steel LongswordResizer.Proxy then
+        Steel LongswordResizer.Proxy:SetSize(Vector3.new(Steel LongswordResizer.Length, 0.538, Steel LongswordResizer.Thickness), Steel LongswordResizer.Length)
     end
 end)
 
-local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.kopisResizer.ThicknessSlider, 0, 2, 2) -- min, max, round
+local newSlider = gg.slider.new(gg.ui:WaitForChild("Menu").Settings.Steel LongswordResizer.ThicknessSlider, 0, 2, 2) -- min, max, round
 
 newSlider:Bind(function(val)
-    kopisResizer.Thickness = val
-    if kopisResizer.Activated and kopisResizer.Proxy then
-        kopisResizer.Proxy:SetSize(Vector3.new(kopisResizer.Length, 0.538, kopisResizer.Thickness), kopisResizer.Length)
+    Steel LongswordResizer.Thickness = val
+    if Steel LongswordResizer.Activated and Steel LongswordResizer.Proxy then
+        Steel LongswordResizer.Proxy:SetSize(Vector3.new(Steel LongswordResizer.Length, 0.538, Steel LongswordResizer.Thickness), Steel LongswordResizer.Length)
     end
 end)
 
 -- Creating a keybind handler
 
-local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Settings.kopisResizer.Keybind, "Kopis Resizer")
+local newKeybind = gg.keybinds.newButton(gg.ui.Menu.Settings.Steel LongswordResizer.Keybind, "Steel Longsword Resizer")
 
 newKeybind:Bind(function(key)
-    kopisResizer.Keybind = key
+    Steel LongswordResizer.Keybind = key
 end)
 
 -- TODO // remake this section to be universal using Keybinds.lua
@@ -113,9 +113,9 @@ UserInputService.InputBegan:connect(function(input)
     local TextBoxFocused = UserInputService:GetFocusedTextBox()
     if TextBoxFocused then return end
     local KeyCode = input.KeyCode
-    if KeyCode == kopisResizer.Keybind then
-        if kopisResizer.Activated == false then
-            kopisResizer:On()
+    if KeyCode == Steel LongswordResizer.Keybind then
+        if Steel LongswordResizer.Activated == false then
+            Steel LongswordResizer:On()
 
             if label then
                 label:Destroy()
@@ -123,19 +123,19 @@ UserInputService.InputBegan:connect(function(input)
             end
 
             label = gg.ui.Templates.TextLabel:Clone()
-            label.Text = "Kopis Resizer"
+            label.Text = "Steel Longsword Resizer"
             label.Parent = gg.ui.Overlay:WaitForChild("Active")
             label.Visible = true
         else
-            kopisResizer:Off()
+            Steel LongswordResizer:Off()
 
             if label then
                 label:Destroy()
                 label = nil
             end
         end
-        kopisResizer.Activated = not kopisResizer.Activated
+        Steel LongswordResizer.Activated = not Steel LongswordResizer.Activated
     end
 end)
 
-return kopisResizer
+return Steel LongswordResizer
