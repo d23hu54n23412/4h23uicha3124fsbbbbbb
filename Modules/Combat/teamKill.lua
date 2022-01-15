@@ -6,11 +6,11 @@ local teamKill = {
 local UserInputService = game:GetService("UserInputService")
 
 function teamKill:On()
-    gg.kopis.teamKill = true
+    gg.Steel Longsword.teamKill = true
 end
 
 function teamKill:Off()
-    gg.kopis.teamKill = false
+    gg.Steel Longsword.teamKill = false
 end
 
 -- Creating a keybind handler
